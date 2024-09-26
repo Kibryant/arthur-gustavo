@@ -48,7 +48,7 @@ const skills = [
       },
       {
         name: 'Vue.js',
-        level: 80,
+        level: 50,
         description: 'Experiência em desenvolvimento de aplicações SPA e SSR.',
       },
       {
@@ -56,6 +56,18 @@ const skills = [
         level: 92,
         description:
           'Domínio em semântica, acessibilidade e design responsivo.',
+      },
+      {
+        name: 'Tailwind CSS',
+        level: 97,
+        description:
+          'Construção de interfaces modernas e design system com utility-first.',
+      },
+      {
+        name: 'Figma',
+        level: 70,
+        description:
+          'Design de interfaces, prototipagem e colaboração com desenvolvedores.',
       },
     ],
   },
@@ -144,38 +156,54 @@ const projects = [
     description:
       'Landing Page para clientes (Nutricionista e Personal Trainer), construída com Nextjs e Tailwind CSS.',
     tags: ['React', 'Next.js', 'Tailwind CSS', 'Responsive Design'],
-    link: 'https://github.com/yourusername/task-management-api',
+    link: 'https://github.com/leafartech/facilitadorderesultados',
   },
   {
-    title: 'Mobile Weather App',
+    title: 'App Dna Mecha Turbo Frontend',
     description:
-      'Cross-platform mobile app built with React Native and OpenWeatherMap API.',
+      'Aplicativo mobile (Ios & Android) para cabeleireira, desenvolvido com React Native e Expo.',
     tags: ['React Native', 'Expo', 'API Integration'],
-    link: 'https://github.com/yourusername/mobile-weather-app',
+    link: 'https://github.com/Kibryant/mecha-turbo-frontend',
+  },
+  {
+    title: 'App Dna Mecha Turbo Backend',
+    description:
+      'API RESTful para aplicativo mobile, desenvolvida com Node.js e MongoDB.',
+    tags: ['Node.js', 'Express', 'MongoDB', 'REST API', 'JWT', 'TypeScript'],
+    link: 'https://github.com/Kibryant/mecha-turbo-backend',
   },
 ]
 
-const blogPosts = [
+const studys = [
   {
-    title: 'Mastering TypeScript: Advanced Tips and Tricks',
-    date: '2023-05-15',
-    excerpt:
-      "Dive deep into TypeScript's advanced features and how to leverage them in your projects.",
-    link: '/blog/mastering-typescript',
+    titulo: 'React Avançado',
+    nivel: 'Intermediário',
+    descricao: 'Explorando hooks personalizados e performance.',
   },
   {
-    title: 'Building Scalable Microservices with Go',
-    date: '2023-04-22',
-    excerpt:
-      'Learn how to design and implement scalable microservices architecture using Go.',
-    link: '/blog/scalable-microservices-go',
+    titulo: 'Machine Learning',
+    nivel: 'Iniciante',
+    descricao: 'Entendendo os conceitos básicos e algoritmos.',
   },
   {
-    title: 'React Performance Optimization Techniques',
-    date: '2023-03-10',
-    excerpt:
-      'Explore various techniques to optimize the performance of your React applications.',
-    link: '/blog/react-performance-optimization',
+    titulo: 'Go Lang para Backend',
+    nivel: 'Intermediário',
+    descricao: 'Construindo APIs escaláveis com Go.',
+  },
+  {
+    titulo: 'UI/UX Design',
+    nivel: 'Iniciante',
+    descricao: 'Aprendendo princípios de design e experiência do usuário.',
+  },
+  {
+    titulo: 'Python para Backend',
+    nivel: 'Intermediário',
+    descricao: 'Desenvolvendo APIs RESTful com Django e Flask.',
+  },
+  {
+    titulo: 'Estudando linguagens baixo nível (C, Zig, Rust)',
+    nivel: 'Iniciante',
+    descricao: 'Explorando linguagens de programação de baixo nível.',
   },
 ]
 
@@ -185,7 +213,7 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const [selectedSkillCategory, setSelectedSkillCategory] = useState('Frontend')
-  const [hoveredSkill, setHoveredSkill] = useState(null)
+  const [hoveredSkill, setHoveredSkill] = useState<null | string>(null)
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
@@ -230,10 +258,11 @@ export default function Home() {
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className={`text-zinc-600 hover:text-blue-600 transition-colors duration-300 ${activeSection === item.toLowerCase()
+                className={`text-zinc-600 hover:text-blue-600 transition-colors duration-300 ${
+                  activeSection === item.toLowerCase()
                     ? 'text-blue-600 font-semibold'
                     : ''
-                  }`}
+                }`}
                 whileTap={{ scale: 0.95 }}
               >
                 {item}
@@ -245,6 +274,7 @@ export default function Home() {
             onClick={toggleMenu}
             aria-expanded={isMenuOpen}
             aria-label="Toggle menu"
+            type="button"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -264,10 +294,11 @@ export default function Home() {
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className={`block py-2 px-4 text-zinc-600 hover:bg-zinc-100 hover:text-blue-600 transition-colors duration-300 ${activeSection === item.toLowerCase()
+                  className={`block py-2 px-4 text-zinc-600 hover:bg-zinc-100 hover:text-blue-600 transition-colors duration-300 ${
+                    activeSection === item.toLowerCase()
                       ? 'text-blue-600 font-semibold'
                       : ''
-                    }`}
+                  }`}
                   whileHover={{ x: 10 }}
                   onClick={() => {
                     setIsMenuOpen(false)
@@ -291,12 +322,12 @@ export default function Home() {
             <motion.div
               className="absolute top-0 left-0 w-80 h-80 bg-blue-300 opacity-20 rounded-full mix-blend-multiply filter blur-2xl animate-pulse"
               animate={{ x: [0, 300, -300], y: [0, -200, 200] }}
-              transition={{ duration: 15, repeat: Infinity }}
+              transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY }}
             />
             <motion.div
               className="absolute bottom-0 right-0 w-80 h-80 bg-purple-300 opacity-20 rounded-full mix-blend-multiply filter blur-2xl animate-pulse"
               animate={{ x: [0, -300, 300], y: [0, 200, -200] }}
-              transition={{ duration: 15, repeat: Infinity }}
+              transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY }}
             />
           </div>
           <Badge variant="outline">
@@ -334,7 +365,7 @@ export default function Home() {
             className="flex space-x-4"
           >
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/Kibryant"
               target="_blank"
               rel="noopener noreferrer"
               className="text-zinc-600 hover:text-blue-600 transition-colors duration-300"
@@ -343,7 +374,7 @@ export default function Home() {
               <Github className="size-6" />
             </a>
             <a
-              href="https://linkedin.com/in/yourusername"
+              href="https://linkedin.com/in/arthur-nascimento-714634261"
               target="_blank"
               rel="noopener noreferrer"
               className="text-zinc-600 hover:text-blue-600 transition-colors duration-300"
@@ -352,14 +383,16 @@ export default function Home() {
               <Linkedin size={24} />
             </a>
             <a
-              href="mailto:your.email@example.com"
+              href="mailto:arthurgustavon@gmail.com"
               className="text-zinc-600 hover:text-blue-600 transition-colors duration-300"
               aria-label="Email Contact"
             >
               <Mail size={24} />
             </a>
             <a
-              href="mailto:your.email@example.com"
+              href="https://instagram.com/arthurgustavk"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-zinc-600 hover:text-blue-600 transition-colors duration-300"
               aria-label="Email Contact"
             >
@@ -442,10 +475,11 @@ export default function Home() {
             {skills.map((category) => (
               <motion.button
                 key={category.category}
-                className={`px-4 py-2 rounded-full ${selectedSkillCategory === category.category
+                className={`px-4 py-2 rounded-full ${
+                  selectedSkillCategory === category.category
                     ? 'bg-gradient-to-tr from-blue-600 to-blue-400 text-white'
                     : 'bg-zinc-200 text-zinc-700 hover:bg-zinc-300'
-                  } transition-colors duration-300`}
+                } transition-colors duration-300`}
                 onClick={() => setSelectedSkillCategory(category.category)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -465,7 +499,7 @@ export default function Home() {
             >
               {skills
                 .find((category) => category.category === selectedSkillCategory)
-                .technologies.map((skill, index) => (
+                ?.technologies.map((skill, index) => (
                   <motion.div
                     key={skill.name}
                     initial={{ opacity: 0, x: -20 }}
@@ -482,7 +516,7 @@ export default function Home() {
                         initial={{ width: 0 }}
                         animate={{ width: `${skill.level}%` }}
                         transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
-                      ></motion.div>
+                      />
                     </div>
                     <AnimatePresence>
                       {hoveredSkill === skill.name && (
@@ -548,33 +582,27 @@ export default function Home() {
         </motion.section>
 
         <motion.section
-          id="blog"
+          id="estudos"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
           className="py-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
-            Blog
+            O que estou estudando
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post, index) => (
+            {studys.map((item, index) => (
               <motion.div
-                key={post.title}
+                key={item.titulo}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-white p-6 rounded-lg shadow-md"
               >
-                <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
-                <p className="text-zinc-500 text-sm mb-2">{post.date}</p>
-                <p className="text-zinc-600 mb-4">{post.excerpt}</p>
-                <a
-                  href={post.link}
-                  className="text-blue-600 hover:text-blue-800 transition-colors duration-300"
-                >
-                  Ler mais
-                </a>
+                <h3 className="text-xl font-semibold mb-2">{item.titulo}</h3>
+                <p className="text-zinc-500 text-sm mb-2">{item.nivel}</p>
+                <p className="text-zinc-600 mb-4">{item.descricao}</p>
               </motion.div>
             ))}
           </div>
@@ -631,7 +659,7 @@ export default function Home() {
                 rows={4}
                 className="w-full px-4 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                 required
-              ></textarea>
+              />
             </div>
             <motion.button
               whileHover={{ scale: 1.05 }}
