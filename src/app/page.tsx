@@ -454,7 +454,23 @@ export default function Home() {
                   whileTap={{ scale: 0.95 }}
                 >
                   <GraduationCap className="w-6 h-6 text-blue-600 mr-2" />
-                  <span>Bacharel em Ciência da Computação</span>
+                  <span>Estudante de administração pela UESC</span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <RocketIcon className="w-6 h-6 text-blue-600 mr-2" />
+                  <span>Entusiasta de tecnologia e inovação</span>
+                </motion.div>
+                <motion.div
+                  className="flex items-center"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Code2Icon className="w-6 h-6 text-blue-600 mr-2" />
+                  <span>Desenvolvedor Fullstack</span>
                 </motion.div>
               </div>
             </motion.div>
