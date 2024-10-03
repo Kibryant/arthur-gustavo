@@ -22,6 +22,10 @@ import { Github } from '@/components/logo/github'
 import { InstagramLogoIcon } from '@radix-ui/react-icons'
 import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { z } from 'zod'
+import { useForm } from 'react-hook-form'
+import { useMutation } from '@tanstack/react-query'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const skills = [
   {
@@ -207,7 +211,31 @@ const studys = [
   },
 ]
 
-const menuItems = ['Inicio', 'Sobre', 'Skills', 'Projeto', 'Blog', 'Contato']
+const menuItems = ['Inicio', 'Sobre', 'Skills', 'Projeto', 'Contato']
+
+const contactSchema = z.object({
+  name: z.string().min(1, 'Nome é obrigatório'),
+  email: z.string().email('Email inválido').min(1, 'Email é obrigatório'),
+  message: z.string().min(1, 'Mensagem é obrigatória'),
+})
+
+type ContactSchema = z.infer<typeof contactSchema>
+
+const sendEmail = async (formData: ContactSchema) => {
+  const response = await fetch('/api/send-email', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData),
+  })
+
+  if (!response.ok) {
+    throw new Error('Erro ao enviar a mensagem')
+  }
+
+  return response.json()
+}
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -239,6 +267,30 @@ export default function Home() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm<ContactSchema>({
+    resolver: zodResolver(contactSchema),
+    mode: 'onChange', // Validação em tempo real
+  })
+
+  const mutation = useMutation({
+    mutationFn: sendEmail,
+    mutationKey: ['send-email'],
+    onSuccess: () => {
+      alert('Mensagem enviada com sucesso!')
+    },
+    onError: () => {
+      alert('Erro ao enviar a mensagem.')
+    },
+  })
+
+  const onSubmit = (data: ContactSchema) => {
+    mutation.mutate(data)
+  }
 
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-800">
@@ -634,7 +686,9 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
             Contato
           </h2>
-          <form className="max-w-lg mx-auto">
+
+          <form className="max-w-lg mx-auto" onSubmit={handleSubmit(onSubmit)}>
+            {/* Nome */}
             <div className="mb-4">
               <label
                 htmlFor="name"
@@ -645,10 +699,18 @@ export default function Home() {
               <input
                 type="text"
                 id="name"
-                className="w-full px-4 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-                required
+                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600
+                  ${errors.name ? 'border-red-500 focus:ring-red-600' : 'border-zinc-300'}`}
+                {...register('name')}
               />
+              {errors.name && (
+                <span className="text-red-500 text-sm">
+                  {errors.name.message}
+                </span>
+              )}
             </div>
+
+            {/* Email */}
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -659,10 +721,18 @@ export default function Home() {
               <input
                 type="email"
                 id="email"
-                className="w-full px-4 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-                required
+                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600
+                  ${errors.email ? 'border-red-500 focus:ring-red-600' : 'border-zinc-300'}`}
+                {...register('email')}
               />
+              {errors.email && (
+                <span className="text-red-500 text-sm">
+                  {errors.email.message}
+                </span>
+              )}
             </div>
+
+            {/* Mensagem */}
             <div className="mb-4">
               <label
                 htmlFor="message"
@@ -673,16 +743,28 @@ export default function Home() {
               <textarea
                 id="message"
                 rows={4}
-                className="w-full px-4 py-2 border border-zinc-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
-                required
+                className={`w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600
+                  ${errors.message ? 'border-red-500 focus:ring-red-600' : 'border-zinc-300'}`}
+                {...register('message')}
               />
+              {errors.message && (
+                <span className="text-red-500 text-sm">
+                  {errors.message.message}
+                </span>
+              )}
             </div>
+
+            {/* Botão de Envio */}
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="w-full bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+              type="submit"
+              disabled={!isValid || isSubmitting || mutation.isPending}
             >
-              Enviar Mensagem
+              {mutation.isPending || isSubmitting
+                ? 'Enviando...'
+                : 'Enviar Mensagem'}
             </motion.button>
           </form>
         </motion.section>
