@@ -26,6 +26,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { useMutation } from '@tanstack/react-query'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { ModeTheme } from '@/components/mode-theme'
 
 const skills = [
   {
@@ -173,8 +174,48 @@ const projects = [
     title: 'App Dna Mecha Turbo Backend',
     description:
       'API RESTful para aplicativo mobile, desenvolvida com Node.js e MongoDB.',
-    tags: ['Node.js', 'Express', 'MongoDB', 'REST API', 'JWT', 'TypeScript'],
+    tags: [
+      'Node.js',
+      'Express',
+      'MongoDB',
+      'REST API',
+      'JWT',
+      'TypeScript',
+      'Zod',
+      'React-Hook-Form',
+    ],
     link: 'https://github.com/Kibryant/mecha-turbo-backend',
+  },
+  {
+    title: 'App Planner Mecha Turbo',
+    description:
+      'Aplicativo mobile (Ios & Android), desenvolvido com React Native e Expo.',
+    tags: [
+      'React Native',
+      'Expo',
+      'API Integration',
+      'TypeScript',
+      'Zustand',
+      'Nativewind',
+      'Tanstack',
+    ],
+    link: 'https://github.com/Kibryant/planner-frontend',
+  },
+  {
+    title: 'App Planner Mecha Turbo Backend',
+    description:
+      'API RESTful para aplicativo mobile, desenvolvida com Node.js e MongoDB.',
+    tags: [
+      'Node.js',
+      'Fastify',
+      'Postgres',
+      'REST API',
+      'JWT',
+      'TypeScript',
+      'Zod',
+      'Prisma',
+    ],
+    link: 'https://github.com/Kibryant/planner-backend',
   },
 ]
 
@@ -293,8 +334,8 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-800">
-      <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+    <div className="min-h-screen">
+      <header className="fixed top-0 left-0 right-0 shadow-md z-50 border-b border-blue-500 backdrop-blur">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
@@ -305,12 +346,13 @@ export default function Home() {
             <RocketIcon size={28} className="inline-block mr-2" />
             Arthur Gustavo
           </motion.h1>
-          <div className="hidden md:flex space-x-6">
+          <div className="hidden md:flex space-x-6 items-center">
+            <ModeTheme />
             {menuItems.map((item) => (
               <motion.a
                 key={item}
                 href={`#${item.toLowerCase()}`}
-                className={`text-zinc-600 hover:text-blue-600 transition-colors duration-300 ${
+                className={`hover:text-blue-600 transition-colors duration-300 ${
                   activeSection === item.toLowerCase()
                     ? 'text-blue-600 font-semibold'
                     : ''
@@ -322,7 +364,7 @@ export default function Home() {
             ))}
           </div>
           <button
-            className="md:hidden text-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-md"
+            className="md:hidden focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-md"
             onClick={toggleMenu}
             aria-expanded={isMenuOpen}
             aria-label="Toggle menu"
@@ -346,7 +388,7 @@ export default function Home() {
                 <motion.a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className={`block py-2 px-4 text-zinc-600 hover:bg-zinc-100 hover:text-blue-600 transition-colors duration-300 ${
+                  className={`block py-2 px-4 hover:bg-zinc-100 hover:text-blue-600 transition-colors duration-300 ${
                     activeSection === item.toLowerCase()
                       ? 'text-blue-600 font-semibold'
                       : ''
@@ -405,7 +447,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-xl md:text-2xl text-zinc-600 mb-8 max-w-2xl"
+            className="text-xl md:text-2xl mb-8 max-w-2xl"
           >
             Desenvolvedor Fullstack apaixonado por criar soluções inovadoras e
             escaláveis
@@ -420,7 +462,7 @@ export default function Home() {
               href="https://github.com/Kibryant"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-600 hover:text-blue-600 transition-colors duration-300"
+              className="hover:text-blue-600 transition-colors duration-300"
               aria-label="GitHub Profile"
             >
               <Github className="size-6" />
@@ -429,14 +471,14 @@ export default function Home() {
               href="https://linkedin.com/in/arthur-nascimento-714634261"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-600 hover:text-blue-600 transition-colors duration-300"
+              className="hover:text-blue-600 transition-colors duration-300"
               aria-label="LinkedIn Profile"
             >
               <Linkedin size={24} />
             </a>
             <a
               href="mailto:arthurgustavon@gmail.com"
-              className="text-zinc-600 hover:text-blue-600 transition-colors duration-300"
+              className="hover:text-blue-600 transition-colors duration-300"
               aria-label="Email Contact"
             >
               <Mail size={24} />
@@ -445,7 +487,7 @@ export default function Home() {
               href="https://instagram.com/arthurgustavk"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-600 hover:text-blue-600 transition-colors duration-300"
+              className="hover:text-blue-600 transition-colors duration-300"
               aria-label="Email Contact"
             >
               <InstagramLogoIcon className="size-6" />
@@ -480,13 +522,13 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <p className="text-lg text-zinc-700 mb-4">
+              <p className="text-lg mb-4">
                 Olá! Sou um desenvolvedor fullstack com mais de 3 anos de
                 experiência na criação de aplicações web e mobile inovadoras.
                 Minha paixão está em resolver problemas complexos e transformar
                 ideias em produtos digitais de alta qualidade.
               </p>
-              <p className="text-lg text-zinc-700 mb-6">
+              <p className="text-lg mb-6">
                 Com um forte background em tecnologias frontend e backend, estou
                 sempre em busca de novos desafios e oportunidades para aprender
                 e crescer na minha carreira.
@@ -545,8 +587,8 @@ export default function Home() {
                 key={category.category}
                 className={`px-4 py-2 rounded-full ${
                   selectedSkillCategory === category.category
-                    ? 'bg-gradient-to-tr from-blue-600 to-blue-400 text-white'
-                    : 'bg-zinc-200 text-zinc-700 hover:bg-zinc-300'
+                    ? 'bg-gradient-to-tr from-blue-600 to-blue-400'
+                    : 'border dark:border-zinc-300'
                 } transition-colors duration-300`}
                 onClick={() => setSelectedSkillCategory(category.category)}
                 whileHover={{ scale: 1.05 }}
@@ -573,7 +615,7 @@ export default function Home() {
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="bg-white p-6 rounded-lg shadow-md relative overflow-hidden"
+                    className="bg-white p-6 rounded-lg shadow-md relative overflow-hidden dark:bg-background dark:border dark:border-zinc-300"
                     onMouseEnter={() => setHoveredSkill(skill.name)}
                     onMouseLeave={() => setHoveredSkill(null)}
                   >
@@ -593,7 +635,7 @@ export default function Home() {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 20 }}
                           transition={{ duration: 0.3 }}
-                          className="absolute inset-0 bg-blue-600 bg-opacity-90 text-white p-6 flex items-center justify-center text-center"
+                          className="absolute inset-0 bg-blue-600 bg-opacity-90 p-6 flex items-center justify-center text-center"
                         >
                           <p>{skill.description}</p>
                         </motion.div>
@@ -622,15 +664,15 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white p-6 rounded-lg shadow-md"
+                className="bg-zinc-100 p-6 rounded-lg shadow-md dark:bg-background dark:border dark:border-zinc-300"
               >
                 <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                <p className="text-zinc-600 mb-4">{project.description}</p>
+                <p className="mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="bg-zinc-200 text-zinc-700 px-2 py-1 rounded-full text-sm"
+                      className="bg-zinc-200 px-2 py-1 rounded-full text-sm dark:bg-background dark:text-zinc-300 dark:border dark:border-zinc-300"
                     >
                       {tag}
                     </span>
@@ -666,11 +708,11 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white p-6 rounded-lg shadow-md"
+                className="bg-zinc-100 p-6 rounded-lg shadow-md dark:bg-background dark:border dark:border-zinc-300"
               >
                 <h3 className="text-xl font-semibold mb-2">{item.titulo}</h3>
                 <p className="text-zinc-500 text-sm mb-2">{item.nivel}</p>
-                <p className="text-zinc-600 mb-4">{item.descricao}</p>
+                <p className="mb-4">{item.descricao}</p>
               </motion.div>
             ))}
           </div>
@@ -690,10 +732,7 @@ export default function Home() {
           <form className="max-w-lg mx-auto" onSubmit={handleSubmit(onSubmit)}>
             {/* Nome */}
             <div className="mb-4">
-              <label
-                htmlFor="name"
-                className="block text-zinc-700 font-semibold mb-2"
-              >
+              <label htmlFor="name" className="block font-semibold mb-2">
                 Nome
               </label>
               <input
@@ -712,10 +751,7 @@ export default function Home() {
 
             {/* Email */}
             <div className="mb-4">
-              <label
-                htmlFor="email"
-                className="block text-zinc-700 font-semibold mb-2"
-              >
+              <label htmlFor="email" className="block font-semibold mb-2">
                 Email
               </label>
               <input
@@ -734,10 +770,7 @@ export default function Home() {
 
             {/* Mensagem */}
             <div className="mb-4">
-              <label
-                htmlFor="message"
-                className="block text-zinc-700 font-semibold mb-2"
-              >
+              <label htmlFor="message" className="block font-semibold mb-2">
                 Mensagem
               </label>
               <textarea
@@ -758,7 +791,7 @@ export default function Home() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-full bg-blue-600 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+              className="w-full bg-blue-600 px-6 py-3 rounded-md text-lg font-semibold hover:bg-blue-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
               type="submit"
               disabled={!isValid || isSubmitting || mutation.isPending}
             >
@@ -770,7 +803,7 @@ export default function Home() {
         </motion.section>
       </main>
 
-      <footer className="bg-zinc-800 text-white py-8">
+      <footer className="bg-zinc-800 py-8">
         <div className="container mx-auto px-4 text-center">
           <p>&copy; 2023 Arthur Gustavo. Todos os direitos reservados.</p>
         </div>
@@ -780,7 +813,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}
-        className="fixed bottom-8 right-8 bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+        className="fixed bottom-8 right-8 bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         aria-label="Voltar ao topo"
       >

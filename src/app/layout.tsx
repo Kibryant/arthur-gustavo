@@ -4,6 +4,7 @@
 import { Poppins } from 'next/font/google'
 import './globals.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ const poppins = Poppins({
 //     'Backend',
 //   ],
 // }
+
 const queryClient = new QueryClient()
 
 export default function RootLayout({
@@ -37,9 +39,15 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${poppins.className} antialiased`}>
-        <QueryClientProvider client={queryClient}>
-          {children}
-        </QueryClientProvider>
+        <NextThemesProvider
+          attribute="class"
+          enableSystem={true}
+          defaultTheme="system"
+        >
+          <QueryClientProvider client={queryClient}>
+            {children}
+          </QueryClientProvider>
+        </NextThemesProvider>
       </body>
     </html>
   )
