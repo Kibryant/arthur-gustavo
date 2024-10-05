@@ -1,6 +1,14 @@
-import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar'
+import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar'
+import { HoverCard, HoverCardTrigger, HoverCardContent } from '../ui/hover-card'
 import { motion } from 'framer-motion'
-import { Briefcase, GraduationCap, RocketIcon, Code2Icon } from 'lucide-react'
+import {
+  Briefcase,
+  GraduationCap,
+  RocketIcon,
+  Code2Icon,
+  CalendarIcon,
+} from 'lucide-react'
+import { Button } from '../ui/button'
 
 const ITEMS = [
   {
@@ -30,9 +38,35 @@ export function About() {
       transition={{ duration: 0.5 }}
       className="py-20"
     >
-      <h2 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-blue-600">
-        Sobre Mim
-      </h2>
+      <HoverCard>
+        <HoverCardTrigger asChild>
+          <Button variant="link" className="w-full text-center mb-10">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-blue-600 underline">
+              Sobre mim
+            </h2>
+          </Button>
+        </HoverCardTrigger>
+        <HoverCardContent className="w-80">
+          <div className="flex justify-between space-x-4">
+            <Avatar>
+              <AvatarImage src="https://github.com/Kibryant.png" />
+              <AvatarFallback>VC</AvatarFallback>
+            </Avatar>
+            <div className="space-y-1">
+              <h4 className="text-sm font-semibold">@arthurgustavk</h4>
+              <p className="text-sm">
+                Desenvolvedor Fullstack apaixonado por tecnologia e inovação.
+              </p>
+              <div className="flex items-center pt-2">
+                <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />{' '}
+                <span className="text-xs text-muted-foreground">
+                  Nascido em 2004
+                </span>
+              </div>
+            </div>
+          </div>
+        </HoverCardContent>
+      </HoverCard>
       <div className="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto px-8">
         <motion.div
           initial={{ opacity: 0, x: -50 }}

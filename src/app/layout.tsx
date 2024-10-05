@@ -1,10 +1,9 @@
-'use client'
-
-// import type { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
+import { Provider } from '@/components/providers'
+import { Toaster } from '@/components/ui/toaster'
+
 import './globals.css'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ThemeProvider as NextThemesProvider } from 'next-themes'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -12,24 +11,22 @@ const poppins = Poppins({
   weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 })
 
-// export const metadata: Metadata = {
-//   title: 'Arthur Gustavo',
-//   description: 'Meu site pessoal',
-//   keywords: [
-//     'Arthur Gustavo',
-//     'Arthur',
-//     'Gustavo',
-//     'Frontend',
-//     'Developer',
-//     'React',
-//     'Next.js',
-//     'TailwindCSS',
-//     'TypeScript',
-//     'Backend',
-//   ],
-// }
-
-const queryClient = new QueryClient()
+export const metadata: Metadata = {
+  title: 'Arthur Gustavo',
+  description: 'Meu site pessoal',
+  keywords: [
+    'Arthur Gustavo',
+    'Arthur',
+    'Gustavo',
+    'Frontend',
+    'Developer',
+    'React',
+    'Next.js',
+    'TailwindCSS',
+    'TypeScript',
+    'Backend',
+  ],
+}
 
 export default function RootLayout({
   children,
@@ -39,15 +36,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${poppins.className} antialiased`}>
-        <NextThemesProvider
-          attribute="class"
-          enableSystem={true}
-          defaultTheme="system"
-        >
-          <QueryClientProvider client={queryClient}>
-            {children}
-          </QueryClientProvider>
-        </NextThemesProvider>
+        <Provider>{children}</Provider>
+
+        <Toaster />
       </body>
     </html>
   )
