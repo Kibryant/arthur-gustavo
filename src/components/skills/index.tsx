@@ -145,7 +145,7 @@ export function Skills() {
             key={category.category}
             className={`px-4 py-2 text-sm md:text-base rounded-full font-medium ${
               selectedSkillCategory === category.category
-                ? 'bg-gradient-to-tr from-blue-600 to-blue-400 text-white'
+                ? 'bg-gradient-to-tr from-blue-600 to-blue-400 text-zinc-100'
                 : 'border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300'
             } transition-colors duration-300`}
             onClick={() => setSelectedSkillCategory(category.category)}
@@ -174,7 +174,7 @@ export function Skills() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative p-6 bg-zinc-100 dark:bg-transparent  rounded-lg shadow-lg overflow-hidden border border-zinc-200 dark:border-zinc-700"
+              className="relative p-6 dark:bg-transparent rounded-lg shadow-lg overflow-hidden border border-zinc-200 dark:border-zinc-700"
               onMouseEnter={() => setHoveredSkill(skill.name)}
               onMouseLeave={() => setHoveredSkill(null)}
             >
@@ -196,7 +196,7 @@ export function Skills() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 20 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute inset-0 bg-blue-600 bg-opacity-90 p-6 flex items-center justify-center text-center text-white rounded-lg"
+                    className="absolute inset-0 bg-blue-600 bg-opacity-90 p-6 flex items-center justify-center text-center text-zinc-100 rounded-lg"
                   >
                     <p className="text-md">{skill.description}</p>
                   </motion.div>
