@@ -5,6 +5,8 @@ import { X, Menu } from 'lucide-react'
 import { ModeTheme } from '../mode-theme'
 import { useEffect } from 'react'
 import { Logo } from '../logo'
+import Link from 'next/link'
+import { Button } from '../ui/button'
 
 interface HeaderProps {
   isMenuOpen: boolean
@@ -12,6 +14,7 @@ interface HeaderProps {
   menuItems: string[]
   activeSection: string
   setActiveSection: (section: string) => void
+  isLogin?: boolean
 }
 
 export function Header({
@@ -20,6 +23,7 @@ export function Header({
   setActiveSection,
   isMenuOpen,
   setIsMenuOpen,
+  isLogin,
 }: HeaderProps) {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
 
@@ -65,6 +69,11 @@ export function Header({
               {item}
             </motion.a>
           ))}
+          <Button className="hidden md:block" asChild>
+            <Link href={isLogin ? '/' : '/admin/sign-in'}>
+              {isLogin ? 'Sai fora enxerido' : 'Login'}
+            </Link>
+          </Button>
         </div>
         <button
           className="md:hidden focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-md"

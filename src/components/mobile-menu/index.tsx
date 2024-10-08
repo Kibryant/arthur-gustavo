@@ -1,4 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
+import { Button } from '../ui/button'
+import Link from 'next/link'
 
 interface MobileMenuProps {
   isMenuOpen: boolean
@@ -6,6 +8,7 @@ interface MobileMenuProps {
   menuItems: string[]
   activeSection: string
   setActiveSection: (section: string) => void
+  isLogin?: boolean
 }
 
 export function MobileMenu({
@@ -14,6 +17,7 @@ export function MobileMenu({
   menuItems,
   activeSection,
   setActiveSection,
+  isLogin,
 }: MobileMenuProps) {
   return (
     <AnimatePresence>
@@ -42,6 +46,12 @@ export function MobileMenu({
                 {item}
               </a>
             ))}
+
+            <Button className="w-full" asChild>
+              <Link href={isLogin ? '/' : '/admin/sign-in'}>
+                {isLogin ? 'Sai fora enxerido' : 'Login'}
+              </Link>
+            </Button>
           </div>
         </motion.div>
       )}

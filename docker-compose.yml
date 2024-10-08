@@ -1,0 +1,12 @@
+name: arthur-gustavo-server-development
+
+services:
+  postgres:
+    container_name: arthur-gustavo-postgres-development
+    image: bitnami/postgresql:13.16.0
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRESQL_USERNAME=arthur_gustavo_development
+      - POSTGRESQL_PASSWORD=arthur_gustavo_development
+      - POSTGRESQL_DATABASE=arthur_gustavo_development
