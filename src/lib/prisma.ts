@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client/extension'
+import { PrismaClient } from '@prisma/client'
 import { Pool } from '@neondatabase/serverless'
 import { env } from './env'
 import { PrismaNeon } from '@prisma/adapter-neon'
