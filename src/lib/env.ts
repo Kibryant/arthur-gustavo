@@ -11,6 +11,7 @@ const envSchema = z.object({
   GOOGLE_MESSAGING_SENDER_ID: z.string(),
   GOOGLE_APP_ID: z.string(),
   GOOGLE_MEASUREMENT_ID: z.string(),
+  NEXT_PUBLIC_BASE_URL: z.string().url(),
 })
 
 export const env = envSchema.parse(process.env)

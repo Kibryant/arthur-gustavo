@@ -6,9 +6,10 @@ import type { Post } from '@/types/post'
 import { RocketIcon } from 'lucide-react'
 import Link from 'next/link'
 import { ModeTheme } from '@/components/mode-theme'
+import { BASE_URL } from '@/constants/base-url'
 
 export default async function Blog() {
-  const response = await fetch('http://localhost:3000/api/posts', {
+  const response = await fetch(`${BASE_URL}/api/posts`, {
     cache: 'no-store',
   })
 

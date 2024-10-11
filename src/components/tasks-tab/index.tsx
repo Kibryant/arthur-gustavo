@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query'
 import { TaskTable } from '../task-table'
 import { TaskTableColumns } from '@/components/task-table/task-table-columns'
 import type { Task } from '@/types/task'
+import { BASE_URL } from '@/constants/base-url'
 
 interface QueryPostResponse {
   tasks: Task[]
@@ -15,9 +16,7 @@ export function TasksTab() {
   const { data } = useQuery<QueryPostResponse>({
     queryKey: ['tasks'],
     queryFn: async () => {
-      const response = await fetch(
-        'http://localhost:3000/api/admin/tasks/get-tasks',
-      )
+      const response = await fetch(`${BASE_URL}/api/admin/tasks/get-tasks`)
       return response.json()
     },
   })

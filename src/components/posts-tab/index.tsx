@@ -16,6 +16,7 @@ import { useQuery } from '@tanstack/react-query'
 import type { Post } from '@/types/post'
 import { PostTable } from '../post-table'
 import { PostTableColumns } from '@/components/post-table/post-table-columns'
+import { BASE_URL } from '@/constants/base-url'
 
 interface QueryPostResponse {
   posts: Post[]
@@ -25,7 +26,7 @@ export function PostsTab() {
   const { data } = useQuery<QueryPostResponse>({
     queryKey: ['posts'],
     queryFn: async () => {
-      const response = await fetch('http://localhost:3000/api/posts')
+      const response = await fetch(`${BASE_URL}api/posts`)
       return response.json()
     },
   })
