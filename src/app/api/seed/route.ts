@@ -1,6 +1,7 @@
 import { env } from '@/lib/env'
 import { prisma } from '@/lib/prisma'
 import * as argon2 from 'argon2'
+import { NextResponse } from 'next/server'
 
 async function seed() {
   const hashedPassword = await argon2.hash(env.ADMIN_PASSWORD)
@@ -27,5 +28,5 @@ async function seed() {
 
 export async function GET() {
   await seed()
-  return { message: 'Seed complete' }
+  return NextResponse.json({ message: 'Seed complete' }, { status: 200 })
 }
