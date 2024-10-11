@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "tsx --env-file .env ./src/seed",
-    "postinstall": "npx prisma generate"
+    "postinstall": "npx prisma generate && npx prisma migrate deploy && npm run seed"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
