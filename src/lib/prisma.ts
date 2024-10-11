@@ -5,23 +5,8 @@ import { PrismaNeon } from '@prisma/adapter-neon'
 
 export const runtime = 'edge'
 
-declare global {
-  // eslint-disable-next-line no-var
-  var cachedPrisma: PrismaClient
-}
-
 const neon = new Pool({ connectionString: env.POSTGRESQL_URL })
 const adapter = new PrismaNeon(neon)
+const prisma = new PrismaClient({ adapter })
 
-let Prisma: PrismaClient
-
-if (process.env.NODE_ENV === 'production') {
-  Prisma = new PrismaClient({ adapter })
-} else {
-  if (!global.cachedPrisma) {
-    global.cachedPrisma = new PrismaClient({ log: ['query'], adapter })
-  }
-  Prisma = global.cachedPrisma
-}
-
-export const prisma = Prisma
+export { prisma }
