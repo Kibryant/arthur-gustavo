@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from 'next/server'
 import { decrypt } from './lib/jwt'
-import { cookies } from 'next/headers'
+import { getSession } from './functions/get-session'
 
 const protectedRoutes = ['/admin']
 const publicRoutes = ['/admin/sign-in']
@@ -10,19 +10,17 @@ export default async function middleware(req: NextRequest) {
   const isProtectedRoute = protectedRoutes.includes(path)
   const isPublicRoute = publicRoutes.includes(path)
 
-  const cookie = cookies().get('session')?.value
+  const cookie = await getSession()
   const session = await decrypt(cookie)
 
   if (isProtectedRoute && !session?.userId) {
     return NextResponse.redirect(new URL('/admin/sign-in', req.nextUrl))
   }
 
-  if (
-    isPublicRoute &&
-    session?.userId &&
-    !req.nextUrl.pathname.startsWith('/dashboard')
-  ) {
-    return NextResponse.redirect(new URL('/admin', req.nextUrl))
+  if (isPublicRoute && session?.userId) {
+    return NextResponse.redirect(
+      new URL('/admin?activeTab=overview', req.nextUrl),
+    )
   }
 
   return NextResponse.next()

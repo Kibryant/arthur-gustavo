@@ -7,91 +7,72 @@ import { Input } from '../ui/input'
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '../ui/table'
-import Link from 'next/link'
+import { useQuery } from '@tanstack/react-query'
+import type { Post } from '@/types/post'
+import { PostTable } from '../post-table'
+import { PostTableColumns } from '@/components/post-table/post-table-columns'
+
+interface QueryPostResponse {
+  posts: Post[]
+}
 
 export function PostsTab() {
-  const [searchTerm, setSearchTerm] = useState('')
+  const { data } = useQuery<QueryPostResponse>({
+    queryKey: ['posts'],
+    queryFn: async () => {
+      const response = await fetch('http://localhost:3000/api/posts')
+      return response.json()
+    },
+  })
 
-  const posts = [
-    {
-      id: 1,
-      title: 'Getting Started with React',
-      status: 'published',
-      date: '2023-05-15',
-    },
-    {
-      id: 2,
-      title: 'Advanced TypeScript Techniques',
-      status: 'draft',
-      date: '2023-05-20',
-    },
-    {
-      id: 3,
-      title: 'The Future of Web Development',
-      status: 'published',
-      date: '2023-05-25',
-    },
-  ]
-
-  const filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+  const posts = data?.posts || []
 
   return (
     <div>
-      <div className="flex justify-between items-center mb-6">
-        <div className="relative">
-          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="text"
-            placeholder="Search posts..."
-            className="pl-8"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
+      <h1 className="text-3xl font-bold mb-6">Posts Criados</h1>
 
-        <Button variant="outline" asChild>
-          <Link href="/admin/create-post">
-            <Plus className="mr-2 h-4 w-4" /> Create New Post
-          </Link>
+      <div className="flex justify-between items-center mb-6">
+        <Button variant="outline">
+          {/* TODO */}
+          <Plus className="mr-2 h-4 w-4" /> Create New Post
         </Button>
       </div>
       <div className="shadow-md rounded-lg overflow-hidden">
-        <Table>
-          <TableCaption>Posts</TableCaption>
+        <PostTable data={posts} columns={PostTableColumns} />
+        {/* <Table>
           <TableHeader>
             <TableRow>
+              <TableHead>ID</TableHead>
               <TableHead>Title</TableHead>
-              <TableHead>Status</TableHead>
               <TableHead>Date</TableHead>
-              <TableHead>Actions</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {filteredPosts.map((post) => (
               <TableRow key={post.id}>
+                <TableCell>{post.id}</TableCell>
                 <TableCell>{post.title}</TableCell>
-                <TableCell>{post.status}</TableCell>
-                <TableCell>{post.date}</TableCell>
                 <TableCell>
+                  {new Date(post.createdAt).toLocaleDateString('pt-br')}
+                </TableCell>
+                <TableCell className="text-right">
                   <Button variant="ghost">
-                    <Edit className="h-4 w-4 text-blue-600" />
+                    <Edit className="h-4 w-4 text-primary" />
                   </Button>
                   <Button variant="ghost">
-                    <Trash className="h-4 w-4 text-red-600" />
+                    <Trash className="h-4 w-4 text-destructive" />
                   </Button>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
-        </Table>
+        </Table> */}
       </div>
     </div>
   )

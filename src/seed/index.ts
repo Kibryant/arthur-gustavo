@@ -1,24 +1,44 @@
 import { env } from '@/lib/env'
 import { prisma } from '@/lib/prisma'
-import * as argon2 from 'argon2'
+import { Priority, Status } from '@prisma/client'
 
 async function seed() {
-  const hashedPassword = await argon2.hash(env.ADMIN_PASSWORD)
-
-  await prisma.user.create({
-    data: {
-      name: 'Arthur Gustavo',
+  const admin = await prisma.user.findUnique({
+    where: {
       email: env.ADMIN_EMAIL,
-      password: hashedPassword,
-      profile: {
-        create: {
-          bio: 'Software Engineer',
-        },
-      },
-      posts: {
-        create: [],
-      },
     },
+  })
+
+  await prisma.task.createMany({
+    data: [
+      {
+        title: 'Task 1',
+        tag: 'Tag 1',
+        userId: admin.id!,
+        priority: Priority.MEDIUM,
+      },
+      {
+        title: 'Task 2',
+        tag: 'Tag 2',
+        userId: admin.id!,
+        priority: Priority.HIGH,
+        status: Status.IN_PROGRESS,
+      },
+      {
+        title: 'Task 3',
+        tag: 'Tag 3',
+        userId: admin.id!,
+        priority: Priority.LOW,
+        status: Status.DONE,
+      },
+      {
+        title: 'Task 4',
+        tag: 'Tag 4',
+        userId: admin.id!,
+        priority: Priority.MEDIUM,
+        status: Status.IN_PROGRESS,
+      },
+    ],
   })
 }
 

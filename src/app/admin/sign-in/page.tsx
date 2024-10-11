@@ -26,7 +26,7 @@ import { useState } from 'react'
 import { MobileMenu } from '@/components/mobile-menu'
 import { useRouter } from 'next/navigation'
 
-export default function LoginScreen() {
+export default function SignIn() {
   const { toast } = useToast()
 
   const router = useRouter()
@@ -41,7 +41,7 @@ export default function LoginScreen() {
     mutationKey: ['admin-sign-in'],
     mutationFn: signIn,
     onSuccess: () => {
-      router.push('/admin')
+      router.push('/admin?activeTab=overview')
     },
     onError: () => {
       toast({

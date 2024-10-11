@@ -46,6 +46,12 @@ export function MobileMenu({
                 {item}
               </a>
             ))}
+            <Link
+              href="/blog"
+              className="hover:text-blue-600 transition-colors duration-300"
+            >
+              Blog
+            </Link>
 
             <Button className="w-full" asChild>
               <Link href={isLogin ? '/' : '/admin/sign-in'}>

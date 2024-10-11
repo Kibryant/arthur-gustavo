@@ -8,7 +8,7 @@ datasource db {
 }
 
 model Post {
-  id        Int      @id @default(autoincrement())
+  id        String   @id @default(cuid())
   title     String
   tags      String[]
   category  String
@@ -34,4 +34,31 @@ model User {
   password String
   posts    Post[]
   profile  Profile?
+  Task     Task[]
+}
+
+model Task {
+  id        Int      @id @default(autoincrement())
+  status    Status   @default(BACKLOG)
+  priority  Priority @default(MEDIUM)
+  title     String
+  tag       String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Status {
+  BACKLOG
+  TODO
+  IN_PROGRESS
+  DONE
+  CANCELED
 }

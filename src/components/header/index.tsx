@@ -69,6 +69,12 @@ export function Header({
               {item}
             </motion.a>
           ))}
+          <Link
+            href="/blog"
+            className="hover:text-blue-600 transition-colors duration-300"
+          >
+            Blog
+          </Link>
           <Button className="hidden md:block" asChild>
             <Link href={isLogin ? '/' : '/admin/sign-in'}>
               {isLogin ? 'Sai fora enxerido' : 'Login'}
