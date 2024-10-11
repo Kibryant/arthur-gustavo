@@ -37,51 +37,59 @@ export default async function Blog() {
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-3xl font-bold mb-8">Posts</h1>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
-              <Card key={post.id} className="overflow-hidden">
-                <AspectRatio ratio={16 / 9}>
-                  <img
-                    src={post.imageUrl}
-                    alt={post.title}
-                    className="object-cover w-full h-full rounded-t-lg"
-                  />
-                </AspectRatio>
-                <CardHeader className="space-y-2">
-                  <div className="flex items-center space-x-2">
-                    <Badge variant="secondary">{post.category}</Badge>
-                  </div>
-                  <CardTitle className="text-2xl font-bold leading-tight">
-                    {post.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-muted-foreground line-clamp-2">
-                    {post.caption}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {post.tags.map((tag) => (
-                      <Badge
-                        key={tag}
-                        variant="outline"
-                        className="hover:bg-secondary"
-                      >
-                        {tag}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex items-center space-x-3 pt-4">
-                    <Avatar>
-                      <AvatarImage
-                        src="https://github.com/Kibryant.png"
-                        alt="Arthur Gustavo"
-                      />
-                      <AvatarFallback>AG</AvatarFallback>
-                    </Avatar>
-                    <span className="text-sm font-medium">Arthur Gustavo</span>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {posts.length === 0 && (
+              <div className="text-center text-lg text-muted-foreground">
+                No posts found
+              </div>
+            )}
+            {posts.length > 0 &&
+              posts.map((post) => (
+                <Card key={post.id} className="overflow-hidden">
+                  <AspectRatio ratio={16 / 9}>
+                    <img
+                      src={post.imageUrl}
+                      alt={post.title}
+                      className="object-cover w-full h-full rounded-t-lg"
+                    />
+                  </AspectRatio>
+                  <CardHeader className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Badge variant="secondary">{post.category}</Badge>
+                    </div>
+                    <CardTitle className="text-2xl font-bold leading-tight">
+                      {post.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-muted-foreground line-clamp-2">
+                      {post.caption}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {post.tags.map((tag) => (
+                        <Badge
+                          key={tag}
+                          variant="outline"
+                          className="hover:bg-secondary"
+                        >
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="flex items-center space-x-3 pt-4">
+                      <Avatar>
+                        <AvatarImage
+                          src="https://github.com/Kibryant.png"
+                          alt="Arthur Gustavo"
+                        />
+                        <AvatarFallback>AG</AvatarFallback>
+                      </Avatar>
+                      <span className="text-sm font-medium">
+                        Arthur Gustavo
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
           </div>
         </div>
       </main>
