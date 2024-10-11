@@ -3,6 +3,8 @@ import { Pool } from '@neondatabase/serverless'
 import { env } from './env'
 import { PrismaNeon } from '@prisma/adapter-neon'
 
+export const runtime = 'edge'
+
 declare global {
   // eslint-disable-next-line no-var
   var cachedPrisma: PrismaClient
