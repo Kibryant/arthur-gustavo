@@ -1,13 +1,12 @@
 import 'server-only'
 import { type JWTPayload, SignJWT, jwtVerify } from 'jose'
-import { env } from './env'
 
 export interface SessionPayload extends JWTPayload {
   userId: string
   expiresAt: Date
 }
 
-const secretKey = env.SESSION_SECRET
+const secretKey = process.env.SESSION_SECRET
 const encodedKey = new TextEncoder().encode(secretKey)
 
 export async function encrypt(payload: SessionPayload) {
