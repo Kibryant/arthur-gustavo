@@ -1,14 +1,15 @@
 import { type FirebaseOptions, initializeApp } from 'firebase/app'
 import { getStorage } from 'firebase/storage'
+import { env } from './env'
 
 const firebaseConfig: FirebaseOptions = {
-  apiKey: 'AIzaSyCosCxZ4y_wv0NdFhEaY8JPA1L_OXMaqFk',
-  authDomain: 'arthur-gustavo.firebaseapp.com',
-  projectId: 'arthur-gustavo',
-  storageBucket: 'arthur-gustavo.appspot.com',
-  messagingSenderId: '970845978584',
-  appId: '1:970845978584:web:9db7c7d1b716ac8fc33cad',
-  measurementId: 'G-L3QCCVW4J5',
+  apiKey: env.GOOGLE_API_KEY,
+  authDomain: env.GOOGLE_AUTH_DOMAIN,
+  projectId: env.GOOGLE_PROJECT_ID,
+  storageBucket: env.GOOGLE_STORAGE_BUCKET,
+  messagingSenderId: env.GOOGLE_MESSAGING_SENDER_ID,
+  appId: env.GOOGLE_APP_ID,
+  measurementId: env.GOOGLE_MEASUREMENT_ID,
 }
 
 const firebase = initializeApp(firebaseConfig)

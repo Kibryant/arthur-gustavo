@@ -1,17 +1,17 @@
 'use client'
 
-import { Search, Plus, Edit, Trash } from 'lucide-react'
-import { useState } from 'react'
+import { Plus } from 'lucide-react'
+// import { useState } from 'react'
 import { Button } from '../ui/button'
-import { Input } from '../ui/input'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '../ui/table'
+// import { Input } from '../ui/input'
+// import {
+//   Table,
+//   TableBody,
+//   TableCell,
+//   TableHead,
+//   TableHeader,
+//   TableRow,
+// } from '../ui/table'
 import { useQuery } from '@tanstack/react-query'
 import type { Post } from '@/types/post'
 import { PostTable } from '../post-table'
