@@ -25,14 +25,7 @@ async function seed() {
   })
 }
 
-seed()
-  .then(() => {
-    console.log('Seed complete')
-  })
-  .catch((error) => {
-    console.error(error)
-    process.exit(1)
-  })
-  .finally(async () => {
-    await prisma.$disconnect()
-  })
+export async function GET() {
+  await seed()
+  return { message: 'Seed complete' }
+}
