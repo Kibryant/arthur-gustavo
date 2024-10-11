@@ -4,6 +4,8 @@ import { HttpStatusCode } from '@/types/http-status-code'
 import { type NextRequest, NextResponse } from 'next/server'
 import * as argon2 from 'argon2'
 
+export const runtime = 'edge'
+
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json()
 

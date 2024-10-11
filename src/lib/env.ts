@@ -12,6 +12,7 @@ const envSchema = z.object({
   GOOGLE_APP_ID: z.string(),
   GOOGLE_MEASUREMENT_ID: z.string(),
   NEXT_PUBLIC_BASE_URL: z.string().url(),
+  POSTGRESQL_URL: z.string().url(),
 })
 
 export const env = envSchema.parse(process.env)
