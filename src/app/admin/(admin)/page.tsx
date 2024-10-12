@@ -12,6 +12,9 @@ import { Settings, LogOut, Bell } from 'lucide-react'
 import { ModeTheme } from '@/components/mode-theme'
 import { Tab } from '@/components/tab'
 import { Sidebar } from '@/components/sidebar'
+import { ChevronLeftIcon } from '@radix-ui/react-icons'
+import { logout } from '@/functions/logout'
+import Link from 'next/link'
 
 const ADMIN_NAME = 'Arthur Gustavo'
 
@@ -60,12 +63,16 @@ export default function AdminDashboard({ searchParams }: AdminDashboardProps) {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem>
-                    <Settings className="mr-2 h-4 w-4" />
-                    <span>Settings</span>
+                    <ChevronLeftIcon className="mr-2 h-4 w-4" />
+                    <Link href="/">Voltar para o site</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
+                    <Settings className="mr-2 h-4 w-4" />
+                    <span>Configurações</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={logout}>
                     <LogOut className="mr-2 h-4 w-4" />
-                    <span>Log out</span>
+                    <span>Sair</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
