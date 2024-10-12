@@ -4,13 +4,16 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   const posts = await prisma.post.findMany({
-    include: {
-      user: true,
-    },
     orderBy: {
       createdAt: 'desc',
     },
   })
 
-  return NextResponse.json({ posts }, { status: HttpStatusCode.OK })
+  return NextResponse.json(
+    {
+      posts,
+      message: 'Posts found',
+    },
+    { status: HttpStatusCode.OK },
+  )
 }

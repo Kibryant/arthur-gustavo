@@ -10,7 +10,7 @@ export const createPostSchema = z.object({
 export type CreatePostSchema = z.infer<typeof createPostSchema>
 
 export async function createPost(data: CreatePostSchema) {
-  const response = await fetch('/api/admin/create-post', {
+  const response = await fetch('/api/admin/posts/create-post', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -14,13 +14,19 @@ export async function POST(req: NextRequest) {
   })
 
   if (!admin) {
-    return NextResponse.json({ message: 'User not found' }, { status: 404 })
+    return NextResponse.json(
+      { message: 'User not found' },
+      { status: HttpStatusCode.NotFound },
+    )
   }
 
   const isPasswordValid = await bcrypt.compare(password, admin.password)
 
   if (!isPasswordValid) {
-    return NextResponse.json({ message: 'Invalid password' }, { status: 401 })
+    return NextResponse.json(
+      { message: 'Invalid password' },
+      { status: HttpStatusCode.Unauthorized },
+    )
   }
 
   await createSession(admin.id)

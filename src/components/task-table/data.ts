@@ -17,39 +17,39 @@ export const statuses = [
   },
   {
     value: 'TODO',
-    label: 'Todo',
+    label: 'A Fazer',
     icon: CircleIcon,
   },
   {
     value: 'IN_PROGRESS',
-    label: 'In Progress',
+    label: 'Em Progresso',
     icon: StopwatchIcon,
   },
   {
     value: 'DONE',
-    label: 'Done',
+    label: 'Feito',
     icon: CheckCircledIcon,
   },
   {
     value: 'CANCELED',
-    label: 'Canceled',
+    label: 'Cancelado',
     icon: CrossCircledIcon,
   },
 ]
 
 export const priorities = [
   {
-    label: 'Low',
+    label: 'Baixa',
     value: 'LOW',
     icon: ArrowDownIcon,
   },
   {
-    label: 'Medium',
+    label: 'Média',
     value: 'MEDIUM',
     icon: ArrowRightIcon,
   },
   {
-    label: 'High',
+    label: 'Alta',
     value: 'HIGH',
     icon: ArrowUpIcon,
   },

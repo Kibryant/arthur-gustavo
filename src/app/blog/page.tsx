@@ -2,18 +2,19 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { AspectRatio } from '@/components/ui/aspect-ratio'
-import type { Post } from '@/types/post'
+import type { PostResponse } from '@/types/post'
 import { RocketIcon } from 'lucide-react'
 import Link from 'next/link'
 import { ModeTheme } from '@/components/mode-theme'
 import { BASE_URL } from '@/constants/base-url'
+import { formatedDate } from '@/lib/utils'
 
 export default async function Blog() {
   const response = await fetch(`${BASE_URL}/api/posts`, {
     cache: 'no-store',
   })
 
-  const { posts } = (await response.json()) as { posts: Post[] }
+  const { posts } = (await response.json()) as { posts: PostResponse[] }
 
   return (
     <>
@@ -26,7 +27,7 @@ export default async function Blog() {
           <div className="hidden md:flex space-x-6 items-center">
             <Link
               href="/"
-              className="hover:text-blue-600 transition-colors duration-300"
+              className="hover:text-primary transition-colors duration-300"
             >
               Inicio
             </Link>
@@ -60,6 +61,9 @@ export default async function Blog() {
                     <CardTitle className="text-2xl font-bold leading-tight">
                       {post.title}
                     </CardTitle>
+                    <p className="text-xs text-muted-foreground">
+                      {formatedDate(post.createdAt)}
+                    </p>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <p className="text-muted-foreground line-clamp-2">
@@ -70,7 +74,7 @@ export default async function Blog() {
                         <Badge
                           key={tag}
                           variant="outline"
-                          className="hover:bg-secondary"
+                          className="hover:bg-secondary text-center"
                         >
                           {tag}
                         </Badge>
