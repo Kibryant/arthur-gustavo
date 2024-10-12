@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { ModeTheme } from '@/components/mode-theme'
 import { BASE_URL } from '@/constants/base-url'
 import { formatedDate } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
 export default async function Blog() {
   const response = await fetch(`${BASE_URL}/api/posts`, {
@@ -31,6 +32,13 @@ export default async function Blog() {
             >
               Inicio
             </Link>
+            <ModeTheme />
+          </div>
+          <div className="flex items-center md:hidden">
+            <Button variant="link">
+              <Link href="/">Voltar ao site</Link>
+            </Button>
+
             <ModeTheme />
           </div>
         </nav>
