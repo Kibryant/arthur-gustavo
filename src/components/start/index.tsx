@@ -28,7 +28,7 @@ export function Start() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Code2Icon className="size-6 mr-2 inline-block text-blue-600" />
+          <Code2Icon className="size-6 mr-2 inline-block text-primary" />
           Desenvolvedor Fullstack
         </motion.span>
       </Badge>
@@ -40,7 +40,7 @@ export function Start() {
         className="text-4xl md:text-6xl font-bold mb-6"
       >
         Olá, eu sou{' '}
-        <TextEffect per="char" className="text-blue-600" delay={0.1}>
+        <TextEffect per="char" className="text-primary" delay={0.1}>
           Arthur Gustavo
         </TextEffect>
       </motion.h2>
@@ -63,7 +63,7 @@ export function Start() {
           href="https://github.com/Kibryant"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-blue-600 transition-colors duration-300"
+          className="hover:text-primary transition-colors duration-300"
           aria-label="GitHub Profile"
         >
           <Github className="size-6 dark:fill-zinc-100" />
@@ -72,14 +72,14 @@ export function Start() {
           href="https://linkedin.com/in/arthur-nascimento-714634261"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-blue-600 transition-colors duration-300"
+          className="hover:text-primary transition-colors duration-300"
           aria-label="LinkedIn Profile"
         >
           <Linkedin size={24} />
         </a>
         <a
           href="mailto:arthurgustavon@gmail.com"
-          className="hover:text-blue-600 transition-colors duration-300"
+          className="hover:text-primary transition-colors duration-300"
           aria-label="Email Contact"
         >
           <Mail size={24} />
@@ -88,7 +88,7 @@ export function Start() {
           href="https://instagram.com/arthurgustavk"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-blue-600 transition-colors duration-300"
+          className="hover:text-primary transition-colors duration-300"
           aria-label="Email Contact"
         >
           <InstagramLogoIcon className="size-6" />

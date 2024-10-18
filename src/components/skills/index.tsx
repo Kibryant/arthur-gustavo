@@ -7,7 +7,7 @@ import { useState } from 'react'
 const SKILLS = [
   {
     category: 'Frontend',
-    icon: <Code className="w-8 h-8 text-blue-500" />,
+    icon: <Code className="w-8 h-8 text-primary" />,
     technologies: [
       {
         name: 'JavaScript',
@@ -136,7 +136,7 @@ export function Skills() {
       transition={{ duration: 0.5 }}
       className="py-16"
     >
-      <h2 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-blue-600">
+      <h2 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-primary">
         Minhas Habilidades
       </h2>
       <div className="mb-10 flex flex-wrap justify-center gap-4">
@@ -145,7 +145,7 @@ export function Skills() {
             key={category.category}
             className={`px-4 py-2 text-sm md:text-base rounded-full font-medium ${
               selectedSkillCategory === category.category
-                ? 'bg-gradient-to-tr from-blue-600 to-blue-400 text-zinc-100'
+                ? 'bg-gradient-to-tr from-primary to-blue-400 text-zinc-100'
                 : 'border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300'
             } transition-colors duration-300`}
             onClick={() => setSelectedSkillCategory(category.category)}
@@ -183,7 +183,7 @@ export function Skills() {
               </h3>
               <div className="w-full bg-zinc-200 dark:bg-zinc-600 rounded-full h-2.5 mb-4">
                 <motion.div
-                  className="bg-blue-600 h-2.5 rounded-full"
+                  className="bg-primary h-2.5 rounded-full"
                   initial={{ width: 0 }}
                   animate={{ width: `${skill.level}%` }}
                   transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
@@ -196,7 +196,7 @@ export function Skills() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 20 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute inset-0 bg-blue-600 bg-opacity-90 p-6 flex items-center justify-center text-center text-zinc-100 rounded-lg"
+                    className="absolute inset-0 bg-primary bg-opacity-90 p-6 flex items-center justify-center text-center text-zinc-100 rounded-lg"
                   >
                     <p className="text-md">{skill.description}</p>
                   </motion.div>

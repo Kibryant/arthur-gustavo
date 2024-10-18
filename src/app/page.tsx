@@ -12,6 +12,8 @@ import { Projects } from '@/components/projects'
 import { Studies } from '@/components/studies'
 import { Footer } from '@/components/footer'
 import { Contact } from '@/components/contact'
+import { Feedbacks } from '@/components/feedbacks'
+import { HelloWorld } from '@/components/hello-world'
 
 const menuItems = ['Inicio', 'Sobre', 'Skills', 'Projeto', 'Contato']
 
@@ -46,7 +48,11 @@ export default function Home() {
 
         <Projects />
 
+        <Feedbacks />
+
         <Studies />
+
+        <HelloWorld />
 
         <Contact />
       </main>

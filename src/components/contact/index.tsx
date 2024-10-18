@@ -81,7 +81,7 @@ export function Contact() {
       transition={{ duration: 0.5 }}
       className="py-16"
     >
-      <h2 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-blue-600">
+      <h2 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-primary">
         Entre em Contato
       </h2>
       <form className="max-w-lg mx-auto" onSubmit={handleSubmit(onSubmit)}>

@@ -50,7 +50,7 @@ export function Header({
   }, [menuItems, setActiveSection])
 
   return (
-    <header className="fixed top-0 left-0 right-0 shadow-md z-50 border-b border-blue-500 backdrop-blur">
+    <header className="fixed top-0 left-0 right-0 shadow-md z-50 border-b border-primary backdrop-blur">
       <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Logo />
         <div className="hidden md:flex space-x-6 items-center">
@@ -59,9 +59,9 @@ export function Header({
             <motion.a
               key={item}
               href={`#${item.toLowerCase()}`}
-              className={`hover:text-blue-600 transition-colors duration-300 ${
+              className={`hover:text-primary transition-colors duration-300 ${
                 activeSection === item.toLowerCase()
-                  ? 'text-blue-600 font-semibold'
+                  ? 'text-primary font-semibold'
                   : ''
               }`}
               whileTap={{ scale: 0.95 }}
@@ -71,7 +71,7 @@ export function Header({
           ))}
           <Link
             href="/blog"
-            className="hover:text-blue-600 transition-colors duration-300"
+            className="hover:text-primary transition-colors duration-300"
           >
             Blog
           </Link>
@@ -82,7 +82,7 @@ export function Header({
           </Button>
         </div>
         <button
-          className="md:hidden focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-md"
+          className="md:hidden focus:outline-none focus:ring-2 focus:ring-primary rounded-md"
           onClick={toggleMenu}
           aria-expanded={isMenuOpen}
           aria-label="Toggle menu"

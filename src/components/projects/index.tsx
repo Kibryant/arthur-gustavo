@@ -81,7 +81,7 @@ export function Projects() {
       transition={{ duration: 0.5 }}
       className="py-16"
     >
-      <h2 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-blue-600">
+      <h2 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-primary">
         Projetos em Destaque
       </h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -103,7 +103,7 @@ export function Projects() {
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 px-2 py-1 rounded-full text-sm"
+                  className="bg-gradient-to-r from-primary/80 to-primary text-zinc-100 px-3 py-1 rounded-full text-sm font-semibold shadow-md transition-transform transform hover:scale-105 hover:shadow-lg"
                 >
                   {tag}
                 </span>
@@ -113,7 +113,7 @@ export function Projects() {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-600 transition-colors duration-300 flex items-center font-medium"
+              className="text-primary hover:text-blue-800 dark:text-blue-400 dark:hover:text-primary transition-colors duration-300 flex items-center font-medium"
             >
               Ver Projeto <ExternalLink size={16} className="ml-1" />
             </a>

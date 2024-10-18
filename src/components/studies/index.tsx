@@ -42,6 +42,21 @@ const STUDIES = [
     level: 'Iniciante',
     description: 'Aprendendo conceitos de computação em nuvem.',
   },
+  {
+    title: 'Estudando DevOps',
+    level: 'Iniciante',
+    description: 'Aprendendo sobre CI/CD, Docker e Kubernetes.',
+  },
+  {
+    title: 'Estudando Blockchain',
+    level: 'Iniciante',
+    description: 'Entendendo os conceitos básicos e aplicações.',
+  },
+  {
+    title: 'Estudando Tamagui',
+    level: 'Iniciante',
+    description: 'Estudando sobre lib de UI para React-Native e React.',
+  },
 ]
 
 export function Studies() {
@@ -53,7 +68,7 @@ export function Studies() {
       transition={{ duration: 0.5 }}
       className="py-16"
     >
-      <h2 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-blue-600">
+      <h2 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-primary">
         O que estou estudando
       </h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

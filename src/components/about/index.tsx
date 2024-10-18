@@ -12,19 +12,19 @@ import { Button } from '../ui/button'
 
 const ITEMS = [
   {
-    icon: <Briefcase className="w-6 h-6 text-blue-600 mr-3" />,
+    icon: <Briefcase className="w-6 h-6 text-primary mr-3" />,
     text: '3+ anos de experiência',
   },
   {
-    icon: <GraduationCap className="w-6 h-6 text-blue-600 mr-3" />,
+    icon: <GraduationCap className="w-6 h-6 text-primary mr-3" />,
     text: 'Estudante de Administração pela UESC',
   },
   {
-    icon: <RocketIcon className="w-6 h-6 text-blue-600 mr-3" />,
+    icon: <RocketIcon className="w-6 h-6 text-primary mr-3" />,
     text: 'Entusiasta de tecnologia e inovação',
   },
   {
-    icon: <Code2Icon className="w-6 h-6 text-blue-600 mr-3" />,
+    icon: <Code2Icon className="w-6 h-6 text-primary mr-3" />,
     text: 'Desenvolvedor Fullstack',
   },
 ]
@@ -41,7 +41,7 @@ export function About() {
       <HoverCard>
         <HoverCardTrigger asChild>
           <Button variant="link" className="w-full text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-blue-600 underline">
+            <h2 className="text-4xl md:text-5xl font-extrabold text-primary underline">
               Sobre mim
             </h2>
           </Button>
@@ -55,7 +55,8 @@ export function About() {
             <div className="space-y-1">
               <h4 className="text-sm font-semibold">@arthurgustavk</h4>
               <p className="text-sm">
-                Desenvolvedor Fullstack apaixonado por tecnologia e inovação.
+                Nasci em Itabuna, Bahia, Brasil. Atualmente, sou estudante de
+                Administração pela UESC.
               </p>
               <div className="flex items-center pt-2">
                 <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />{' '}
@@ -76,7 +77,7 @@ export function About() {
         >
           <Avatar className="w-40 h-40 md:w-60 md:h-60 shadow-lg rounded-full overflow-hidden border-4 border-blue-300">
             <AvatarImage src="https://github.com/Kibryant.png" />
-            <AvatarFallback className="bg-blue-600 text-white text-4xl font-semibold">
+            <AvatarFallback className="bg-primary text-white text-4xl font-semibold">
               AG
             </AvatarFallback>
           </Avatar>
@@ -90,7 +91,7 @@ export function About() {
         >
           <p className="text-lg md:text-xl leading-relaxed text-gray-700 dark:text-zinc-300">
             Olá! Sou um desenvolvedor fullstack com mais de{' '}
-            <strong className="text-blue-600">3 anos</strong> de experiência na
+            <strong className="text-primary">3 anos</strong> de experiência na
             criação de aplicações web e mobile inovadoras. Tenho paixão por
             resolver problemas complexos e transformar ideias em produtos
             digitais de alta qualidade.
