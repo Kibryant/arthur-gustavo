@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       { status: HttpStatusCode.Unauthorized },
     )
   }
-
+  
   await createSession(admin.id)
 
   return NextResponse.json(

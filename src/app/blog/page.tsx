@@ -16,7 +16,7 @@ export default async function Blog() {
   })
 
   const { posts } = (await response.json()) as { posts: PostResponse[] }
-
+  
   return (
     <>
       <header className="fixed top-0 left-0 right-0 shadow-md z-50 border-b border-primary backdrop-blur">
@@ -49,9 +49,10 @@ export default async function Blog() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {posts.length === 0 && (
               <div className="text-center text-lg text-muted-foreground">
-                No posts found
+                Nenhum post encontrado
               </div>
             )}
+
             {posts.length > 0 &&
               posts.map((post) => (
                 <Card key={post.id} className="overflow-hidden">

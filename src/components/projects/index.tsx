@@ -70,6 +70,12 @@ const PROJECTS = [
     ],
     link: 'https://github.com/Kibryant/planner-backend',
   },
+  {
+    title: 'Restaurante Badejo',
+    description: 'Site para restaurante, construído com Nextjs e Tailwind CSS. Suporte a I18n (pt-BR, zh-CN, ja-JP, en-US).',
+    tags: ['React', 'Next.js', 'Tailwind CSS', 'Responsive Design'],
+    link: 'https://badejo.vercel.app/',
+  }
 ]
 
 export function Projects() {

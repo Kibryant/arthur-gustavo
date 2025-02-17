@@ -7,6 +7,7 @@ export async function createSession(userId: string) {
   const expiresInSevenDaysFromNow = new Date(
     Date.now() + 7 * 24 * 60 * 60 * 1000,
   )
+
   const session = await encrypt({
     userId,
     expiresAt: expiresInSevenDaysFromNow,

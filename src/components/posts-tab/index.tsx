@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from '../ui/table'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import type { PostResponse } from '@/types/post'
 import { BASE_URL } from '@/constants/base-url'
 import Image from 'next/image'
@@ -22,14 +22,36 @@ interface QueryPostResponse {
 }
 
 export function PostsTab() {
+  const queryClient = new QueryClient()
+
   const { data } = useQuery<QueryPostResponse>({
     queryKey: ['posts'],
     queryFn: async () => {
       const response = await fetch(`${BASE_URL}/api/posts`)
       return response.json()
     },
-
     staleTime: FIVE_MINUTES,
+  })
+
+  const deletePostMutation = useMutation({
+    mutationFn: async (postId: number) => {
+      const response = await fetch(`${BASE_URL}/api/posts/delete-post`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: postId }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Erro ao deletar o post')
+      }
+      return response.json()
+    },
+    onSuccess: () => {
+     
+      queryClient.invalidateQueries({ queryKey: ['posts'] })
+    },
   })
 
   const posts = data?.posts || []
@@ -79,7 +101,8 @@ export function PostsTab() {
                   </Button>
                   <Button
                     variant="ghost"
-                    className="hover:bg-muted hover:scale-105 transition-transform"
+                    className="hover:bg-muted hover:scale-105 transition-transform z-50"
+                    onClick={() => deletePostMutation.mutate(post.id)}
                   >
                     <Trash className="h-4 w-4 text-destructive" />
                   </Button>

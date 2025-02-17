@@ -190,7 +190,6 @@ export function TasksTab() {
                 )}
               </div>
 
-              {/* Botão de submissão */}
               <Button type="submit" className="mt-4">
                 Criar Tarefa
               </Button>
