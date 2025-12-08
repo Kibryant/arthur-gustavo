@@ -22,7 +22,8 @@ export function Start() {
           transition={{ duration: 15, repeat: Number.POSITIVE_INFINITY }}
         />
       </div>
-      <Badge variant="outline">
+      
+      <Badge variant="outline" className="mb-4">
         <motion.span
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}

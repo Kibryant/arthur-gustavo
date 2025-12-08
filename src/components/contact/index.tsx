@@ -74,11 +74,8 @@ export function Contact() {
   }
 
   return (
-    <motion.section
+    <section
       id="contato"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
       className="py-16"
     >
       <h2 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-primary">
@@ -134,6 +131,6 @@ export function Contact() {
             : 'Enviar Mensagem'}
         </motion.button>
       </form>
-    </motion.section>
+    </section>
   )
 }

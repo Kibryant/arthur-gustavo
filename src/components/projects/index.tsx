@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { link } from 'fs'
 import { ExternalLink } from 'lucide-react'
 
 const PROJECTS = [
@@ -75,6 +76,18 @@ const PROJECTS = [
     description: 'Site para restaurante, construído com Nextjs e Tailwind CSS. Suporte a I18n (pt-BR, zh-CN, ja-JP, en-US).',
     tags: ['React', 'Next.js', 'Tailwind CSS', 'Responsive Design'],
     link: 'https://badejo.vercel.app/',
+  },
+  {
+    title: 'Arthur Vilas Marketing',
+    description: 'Landing Page para agência de marketing, construída com Nextjs e Tailwind CSS.',
+    tags: ['React', 'Next.js', 'Tailwind CSS', 'Responsive Design'],
+    link: 'https://vilasmkt.com.br/',
+  },
+  {
+    title: 'Eco Casa',
+    description: 'Site para empresa de construção sustentável, construído com Nextjs e Tailwind CSS.',
+    tags: ['React', 'Next.js', 'Tailwind CSS', 'Responsive Design'],
+    link: 'https://eco-casa-theta.vercel.app/',
   }
 ]
 

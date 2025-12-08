@@ -13,8 +13,8 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: 'Arthur Gustavo',
-  description: 'Meu site pessoal',
+  title: 'Arthur Gustavo - Desenvolvedor Full Stack',
+  description: 'Portfólio de Arthur Gustavo, desenvolvedor especializado em React, Next.js e TypeScript',
   keywords: [
     'Arthur Gustavo',
     'Arthur',
@@ -27,6 +27,11 @@ export const metadata: Metadata = {
     'TypeScript',
     'Backend',
   ],
+  openGraph: {
+    title: 'Arthur Gustavo - Desenvolvedor',
+    description: 'Confira meus projetos e habilidades',
+    images: ['/og-image.png'],
+  },
 }
 
 export default function RootLayout({

@@ -13,7 +13,7 @@ import { Button } from '../ui/button'
 const ITEMS = [
   {
     icon: <Briefcase className="w-6 h-6 text-primary mr-3" />,
-    text: '3+ anos de experiência',
+    text: '5+ anos de experiência',
   },
   {
     icon: <GraduationCap className="w-6 h-6 text-primary mr-3" />,
@@ -90,8 +90,8 @@ export function About() {
           className="text-left space-y-6"
         >
           <p className="text-lg md:text-xl leading-relaxed text-gray-700 dark:text-zinc-300">
-            Olá! Sou um desenvolvedor fullstack com mais de{' '}
-            <strong className="text-primary">3 anos</strong> de experiência na
+            Sou um desenvolvedor fullstack com mais de{' '}
+            <strong className="text-primary">5 anos</strong> de experiência na
             criação de aplicações web e mobile inovadoras. Tenho paixão por
             resolver problemas complexos e transformar ideias em produtos
             digitais de alta qualidade.
