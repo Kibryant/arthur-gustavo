@@ -2,24 +2,22 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
+import { ArrowUp } from 'lucide-react'
 import { Header } from '@/components/header'
 import { MobileMenu } from '@/components/mobile-menu'
 import { Start } from '@/components/start'
 import { About } from '@/components/about'
+import { Currently } from '@/components/currently'
 import { Skills } from '@/components/skills'
 import { Projects } from '@/components/projects'
-import { Studies } from '@/components/studies'
 import { Footer } from '@/components/footer'
 import { Contact } from '@/components/contact'
-import { Feedbacks } from '@/components/feedbacks'
-import { HelloWorld } from '@/components/hello-world'
 
-const menuItems = ['Inicio', 'Sobre', 'Skills', 'Projeto', 'Contato']
+const menuItems = ['Sobre', 'Agora', 'Skills', 'Projeto', 'Contato']
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
+  const [activeSection, setActiveSection] = useState('inicio')
 
   return (
     <div className="min-h-screen">
@@ -39,35 +37,28 @@ export default function Home() {
         setActiveSection={setActiveSection}
       />
 
-      <main className="container mx-auto px-4 pt-24 pb-12">
+      <main className="relative">
         <Start />
-
         <About />
-
+        <Currently />
         <Skills />
-
         <Projects />
-
-        <Feedbacks />
-
-        <Studies />
-
-        <HelloWorld />
-
         <Contact />
       </main>
 
       <Footer />
 
       <motion.button
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 }}
-        className="fixed bottom-8 right-8 bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1.2 }}
+        whileHover={{ y: -2 }}
+        className="fixed bottom-6 right-6 size-11 rounded-full bg-foreground text-background flex items-center justify-center shadow-lg z-40 group"
         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         aria-label="Voltar ao topo"
+        type="button"
       >
-        <ChevronDown className="transform rotate-180 text-zinc-100" />
+        <ArrowUp className="size-4 group-hover:-translate-y-0.5 transition-transform" />
       </motion.button>
     </div>
   )

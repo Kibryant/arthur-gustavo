@@ -1,35 +1,50 @@
 import type { Metadata } from 'next'
-import { Poppins } from 'next/font/google'
+import { Geist, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
 import { Provider } from '@/components/providers'
 import { Toaster } from '@/components/ui/toaster'
 
 import './styles/globals.css'
 import './styles/swiper.css'
 
-const poppins = Poppins({
+const geist = Geist({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-sans',
+})
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: '400',
+  style: ['normal', 'italic'],
+  variable: '--font-display',
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
 })
 
 export const metadata: Metadata = {
-  title: 'Arthur Gustavo - Desenvolvedor Full Stack',
-  description: 'Portfólio de Arthur Gustavo, desenvolvedor especializado em React, Next.js e TypeScript',
+  title: 'Arthur Gustavo — Fullstack Engineer',
+  description:
+    'Portfólio de Arthur Gustavo. Construindo produtos web e mobile desde 2019, em Itabuna, Bahia.',
   keywords: [
     'Arthur Gustavo',
-    'Arthur',
-    'Gustavo',
+    'Fullstack',
     'Frontend',
-    'Developer',
+    'Backend',
     'React',
     'Next.js',
-    'TailwindCSS',
     'TypeScript',
-    'Backend',
+    'React Native',
+    'Brazil',
+    'Bahia',
   ],
   openGraph: {
-    title: 'Arthur Gustavo - Desenvolvedor',
-    description: 'Confira meus projetos e habilidades',
+    title: 'Arthur Gustavo — Fullstack Engineer',
+    description: 'Construindo produtos web e mobile desde 2019, em Itabuna, Bahia.',
     images: ['/og-image.png'],
   },
 }
@@ -40,10 +55,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${poppins.className} antialiased`}>
+    <html
+      lang="pt-BR"
+      className={`scroll-smooth ${geist.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="font-sans antialiased">
         <Provider>{children}</Provider>
-
         <Toaster />
       </body>
     </html>

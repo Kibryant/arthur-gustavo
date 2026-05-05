@@ -18,8 +18,10 @@ import Link from 'next/link'
 
 const ADMIN_NAME = 'Arthur Gustavo'
 
+import { use } from 'react'
+
 interface AdminDashboardProps {
-  searchParams: { [key: string]: string | string[] | undefined }
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 type TabType =
@@ -31,7 +33,7 @@ type TabType =
   | 'tasks'
 
 export default function AdminDashboard({ searchParams }: AdminDashboardProps) {
-  const activeTab = searchParams.activeTab as TabType
+  const activeTab = use(searchParams).activeTab as TabType
 
   return (
     <div className="flex h-screen">

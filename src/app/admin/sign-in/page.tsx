@@ -86,8 +86,8 @@ export default function SignIn() {
                 <RocketIcon className="h-12 w-12 text-primary" />
                 <div className="space-y-6">
                   <blockquote className="text-lg font-medium leading-relaxed text-foreground">
-                    "Esta plataforma revolucionou nossa forma de trabalhar. A interface intuitiva e as ferramentas
-                    poderosas nos permitem criar soluções excepcionais em tempo recorde."
+                    &ldquo;Esta plataforma revolucionou nossa forma de trabalhar. A interface intuitiva e as ferramentas
+                    poderosas nos permitem criar soluções excepcionais em tempo recorde.&rdquo;
                   </blockquote>
                   <footer className="text-sm text-muted-foreground">
                     <cite className="font-medium">Maria Silva</cite>

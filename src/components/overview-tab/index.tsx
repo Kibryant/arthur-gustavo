@@ -117,7 +117,7 @@ export function OverviewTab() {
           <CardContent>
             <div className="text-sm">Last post edited: 2h ago</div>
             <p className="text-xs text-muted-foreground">
-              "10 Tips for Better SEO"
+              &ldquo;10 Tips for Better SEO&rdquo;
             </p>
           </CardContent>
         </Card>

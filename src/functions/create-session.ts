@@ -13,7 +13,8 @@ export async function createSession(userId: string) {
     expiresAt: expiresInSevenDaysFromNow,
   })
 
-  cookies().set('session', session, {
+  const cookieStore = await cookies()
+  cookieStore.set('session', session, {
     httpOnly: true,
     secure: true,
     expires: expiresInSevenDaysFromNow,

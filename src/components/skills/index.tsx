@@ -1,211 +1,247 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { Code, Database, Phone, Server } from 'lucide-react'
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 
-const SKILLS = [
+type Level = 'daily' | 'comfortable' | 'familiar'
+
+const LEVEL_LABEL: Record<Level, string> = {
+  daily: 'daily',
+  comfortable: 'comfortable',
+  familiar: 'familiar',
+}
+
+const LEVEL_DOTS: Record<Level, number> = {
+  daily: 3,
+  comfortable: 2,
+  familiar: 1,
+}
+
+interface Tech {
+  name: string
+  level: Level
+  note?: string
+}
+
+interface Group {
+  id: string
+  label: string
+  caption: string
+  items: Tech[]
+}
+
+const GROUPS: Group[] = [
   {
-    category: 'Frontend',
-    icon: <Code className="w-8 h-8 text-primary" />,
-    technologies: [
-      {
-        name: 'JavaScript',
-        level: 90,
-        description:
-          'Experiência avançada em ES6+, manipulação do DOM e APIs modernas.',
-      },
-      {
-        name: 'TypeScript',
-        level: 85,
-        description:
-          'Forte conhecimento em tipagem estática e recursos avançados.',
-      },
-      {
-        name: 'React',
-        level: 88,
-        description:
-          'Proficiente em hooks, context API, e otimização de performance.',
-      },
-      {
-        name: 'Vue.js',
-        level: 50,
-        description: 'Experiência em desenvolvimento de aplicações SPA e SSR.',
-      },
-      {
-        name: 'HTML5/CSS3',
-        level: 92,
-        description:
-          'Domínio em semântica, acessibilidade e design responsivo.',
-      },
-      {
-        name: 'Tailwind CSS',
-        level: 97,
-        description:
-          'Construção de interfaces modernas e design system com utility-first.',
-      },
-      {
-        name: 'Figma',
-        level: 70,
-        description:
-          'Design de interfaces, prototipagem e colaboração com desenvolvedores.',
-      },
+    id: 'frontend',
+    label: 'Frontend',
+    caption: 'interfaces que importam — do markup ao framer-motion',
+    items: [
+      { name: 'TypeScript', level: 'daily', note: 'tipo é primeiro pensamento' },
+      { name: 'React 19', level: 'daily' },
+      { name: 'Next.js 16', level: 'daily', note: 'app router, server actions' },
+      { name: 'Tailwind v4', level: 'daily' },
+      { name: 'shadcn/ui', level: 'daily' },
+      { name: 'Framer Motion', level: 'daily' },
+      { name: 'TanStack Query', level: 'daily' },
+      { name: 'React Hook Form', level: 'daily' },
+      { name: 'Zustand', level: 'comfortable' },
+      { name: 'Vue.js', level: 'familiar' },
+      { name: 'Figma', level: 'comfortable' },
     ],
   },
   {
-    category: 'Backend',
-    icon: <Server className="w-8 h-8 text-green-500" />,
-    technologies: [
-      {
-        name: 'Node.js',
-        level: 82,
-        description:
-          'Criação de APIs RESTful, autenticação e integração com bancos de dados.',
-      },
-      {
-        name: 'Go',
-        level: 75,
-        description:
-          'Desenvolvimento de microserviços e aplicações de alta performance.',
-      },
-      {
-        name: 'Python',
-        level: 80,
-        description: 'Experiência em Django, Flask e automação de tarefas.',
-      },
-      {
-        name: 'Java',
-        level: 78,
-        description:
-          'Desenvolvimento de aplicações empresariais com Spring Boot.',
-      },
+    id: 'backend',
+    label: 'Backend',
+    caption: 'APIs, autenticação, integrações e serviços',
+    items: [
+      { name: 'Node.js', level: 'daily' },
+      { name: 'Fastify', level: 'comfortable' },
+      { name: 'Hono', level: 'comfortable' },
+      { name: 'Express', level: 'comfortable' },
+      { name: 'Go', level: 'comfortable', note: 'microserviços performáticos' },
+      { name: 'Python', level: 'comfortable', note: 'fastapi, automações' },
+      { name: 'Java', level: 'familiar', note: 'spring boot' },
+      { name: 'Bun', level: 'comfortable' },
+      { name: 'JWT / Auth.js', level: 'daily' },
     ],
   },
   {
-    category: 'Banco de Dados',
-    icon: <Database className="w-8 h-8 text-purple-500" />,
-    technologies: [
-      {
-        name: 'MongoDB',
-        level: 85,
-        description: 'Modelagem de dados, queries avançadas e otimização.',
-      },
-      {
-        name: 'PostgreSQL',
-        level: 80,
-        description:
-          'Design de esquemas, stored procedures e otimização de consultas.',
-      },
-      {
-        name: 'Redis',
-        level: 75,
-        description:
-          'Caching, filas de mensagens e estruturas de dados avançadas.',
-      },
+    id: 'data',
+    label: 'Data',
+    caption: 'modelagem, queries, otimização',
+    items: [
+      { name: 'PostgreSQL', level: 'daily' },
+      { name: 'Prisma', level: 'daily' },
+      { name: 'Drizzle ORM', level: 'comfortable' },
+      { name: 'MongoDB', level: 'comfortable' },
+      { name: 'Redis', level: 'comfortable' },
+      { name: 'Supabase', level: 'comfortable' },
+      { name: 'Neon', level: 'comfortable' },
     ],
   },
   {
-    category: 'Mobile',
-    icon: <Phone className="w-8 h-8 text-yellow-500" />,
-    technologies: [
-      {
-        name: 'React Native',
-        level: 82,
-        description:
-          'Desenvolvimento de aplicativos multiplataforma para iOS e Android.',
-      },
-      {
-        name: 'Expo',
-        level: 80,
-        description:
-          'Configuração de projetos, APIs nativas e publicação de apps.',
-      },
+    id: 'mobile',
+    label: 'Mobile',
+    caption: 'react native + expo, iOS e android',
+    items: [
+      { name: 'React Native', level: 'daily' },
+      { name: 'Expo', level: 'daily', note: 'router, eas, native modules' },
+      { name: 'NativeWind', level: 'daily' },
+      { name: 'React Native Reanimated', level: 'comfortable' },
+    ],
+  },
+  {
+    id: 'ai',
+    label: 'AI / Tooling',
+    caption: 'agentes, automação, infra de dev',
+    items: [
+      { name: 'LangChain', level: 'comfortable' },
+      { name: 'LangGraph', level: 'comfortable' },
+      { name: 'Tavily', level: 'comfortable' },
+      { name: 'Anthropic SDK', level: 'comfortable' },
+      { name: 'Docker', level: 'comfortable' },
+      { name: 'Turbopack', level: 'daily' },
+      { name: 'GitHub Actions', level: 'comfortable' },
     ],
   },
 ]
 
+function LevelDots({ level }: { level: Level }) {
+  const filled = LEVEL_DOTS[level]
+  const color =
+    level === 'daily'
+      ? 'bg-primary'
+      : level === 'comfortable'
+        ? 'bg-foreground/70'
+        : 'bg-muted-foreground/40'
+  return (
+    <span className="inline-flex items-center gap-0.5">
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className={`size-1.5 rounded-full ${i < filled ? color : 'bg-muted-foreground/20'}`}
+        />
+      ))}
+    </span>
+  )
+}
+
 export function Skills() {
-  const [hoveredSkill, setHoveredSkill] = useState<null | string>(null)
-  const [selectedSkillCategory, setSelectedSkillCategory] = useState('Frontend')
+  const [activeGroup, setActiveGroup] = useState<string>('frontend')
+  const [hovered, setHovered] = useState<string | null>(null)
+  const current = GROUPS.find((g) => g.id === activeGroup) ?? GROUPS[0]
 
   return (
-    <motion.section
+    <section
       id="skills"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="py-16"
+      className="relative py-24 lg:py-32 container mx-auto px-6 lg:px-10"
     >
-      <h2 className="text-4xl md:text-5xl font-extrabold mb-10 text-center text-primary">
-        Minhas Habilidades
-      </h2>
-      <div className="mb-10 flex flex-wrap justify-center gap-4">
-        {SKILLS.map((category) => (
-          <motion.button
-            key={category.category}
-            className={`px-4 py-2 text-sm md:text-base rounded-full font-medium ${
-              selectedSkillCategory === category.category
-                ? 'bg-gradient-to-tr from-primary to-blue-400 text-zinc-100'
-                : 'border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300'
-            } transition-colors duration-300`}
-            onClick={() => setSelectedSkillCategory(category.category)}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {category.category}
-          </motion.button>
+      <div className="flex items-baseline gap-4 mb-12">
+        <span className="meta-strong text-primary">03</span>
+        <h2 className="font-display text-4xl md:text-6xl lg:text-7xl italic tracking-tight">
+          stack
+        </h2>
+        <div className="flex-1 rule mb-3" />
+        <span className="meta hidden md:inline">/ ferramentas do dia-a-dia</span>
+      </div>
+
+      {/* level legend */}
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-10 meta">
+        {(['daily', 'comfortable', 'familiar'] as Level[]).map((lv) => (
+          <span key={lv} className="flex items-center gap-2">
+            <LevelDots level={lv} />
+            <span>{LEVEL_LABEL[lv]}</span>
+          </span>
         ))}
       </div>
 
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={selectedSkillCategory}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5 }}
-          className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto"
-        >
-          {SKILLS.find(
-            (category) => category.category === selectedSkillCategory,
-          )?.technologies.map((skill, index) => (
-            <motion.div
-              key={skill.name}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative p-6 dark:bg-transparent rounded-lg shadow-lg overflow-hidden border border-zinc-200 dark:border-zinc-700"
-              onMouseEnter={() => setHoveredSkill(skill.name)}
-              onMouseLeave={() => setHoveredSkill(null)}
-            >
-              <h3 className="text-2xl font-semibold mb-4 text-zinc-900 dark:text-zinc-100">
-                {skill.name}
-              </h3>
-              <div className="w-full bg-zinc-200 dark:bg-zinc-600 rounded-full h-2.5 mb-4">
-                <motion.div
-                  className="bg-primary h-2.5 rounded-full"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${skill.level}%` }}
-                  transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
-                />
-              </div>
-              <AnimatePresence>
-                {hoveredSkill === skill.name && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 20 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute inset-0 bg-primary bg-opacity-90 p-6 flex items-center justify-center text-center text-zinc-100 rounded-lg"
+      <div className="grid lg:grid-cols-12 gap-10">
+        {/* left — group nav */}
+        <nav className="lg:col-span-4">
+          <ul className="border-t border-rule">
+            {GROUPS.map((g, idx) => {
+              const active = g.id === activeGroup
+              return (
+                <li key={g.id}>
+                  <button
+                    type="button"
+                    onClick={() => setActiveGroup(g.id)}
+                    className="w-full text-left flex items-baseline gap-3 py-4 border-b border-rule group hover:bg-surface/60 transition-colors -mx-2 px-2"
                   >
-                    <p className="text-md">{skill.description}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
-        </motion.div>
-      </AnimatePresence>
-    </motion.section>
+                    <span className="meta tabular-nums text-muted-foreground/60 w-6">
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <span
+                      className={`font-display text-2xl md:text-3xl tracking-tight transition-all ${active ? 'italic text-primary' : 'group-hover:italic'}`}
+                    >
+                      {g.label}
+                    </span>
+                    <span className="ml-auto meta tabular-nums">
+                      ({String(g.items.length).padStart(2, '0')})
+                    </span>
+                    <motion.span
+                      className="text-primary opacity-0 group-hover:opacity-60 transition-opacity"
+                      animate={active ? { x: 0, opacity: 1 } : {}}
+                    >
+                      →
+                    </motion.span>
+                  </button>
+                </li>
+              )
+            })}
+          </ul>
+        </nav>
+
+        {/* right — tech list */}
+        <div className="lg:col-span-8">
+          <motion.div
+            key={current.id}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <p className="text-base md:text-lg text-muted-foreground italic mb-8 max-w-md">
+              {current.caption}
+            </p>
+
+            <div className="border-t border-rule">
+              {current.items.map((tech, idx) => (
+                <motion.div
+                  key={tech.name}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: idx * 0.03 }}
+                  onMouseEnter={() => setHovered(tech.name)}
+                  onMouseLeave={() => setHovered(null)}
+                  className="grid grid-cols-12 gap-2 py-3 border-b border-rule items-baseline group hover:bg-surface/40 -mx-2 px-2 transition-colors cursor-default"
+                >
+                  <span className="meta tabular-nums col-span-1 text-muted-foreground/50 hidden sm:block">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <span className="col-span-7 sm:col-span-5 text-base font-medium tracking-tight">
+                    {tech.name}
+                  </span>
+                  <span className="col-span-2 sm:col-span-2 flex items-center justify-end sm:justify-start">
+                    <LevelDots level={tech.level} />
+                  </span>
+                  <span className="col-span-3 sm:col-span-2 meta text-right sm:text-left text-muted-foreground/70">
+                    {LEVEL_LABEL[tech.level]}
+                  </span>
+                  <span
+                    className={`col-span-12 sm:col-span-2 text-xs italic text-muted-foreground transition-opacity ${
+                      hovered === tech.name || tech.note
+                        ? 'opacity-100'
+                        : 'opacity-0'
+                    }`}
+                  >
+                    {tech.note ?? ''}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
   )
 }

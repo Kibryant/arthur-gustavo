@@ -1,124 +1,174 @@
-import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar'
-import { HoverCard, HoverCardTrigger, HoverCardContent } from '../ui/hover-card'
-import { motion } from 'framer-motion'
-import {
-  Briefcase,
-  GraduationCap,
-  RocketIcon,
-  Code2Icon,
-  CalendarIcon,
-} from 'lucide-react'
-import { Button } from '../ui/button'
+'use client'
 
-const ITEMS = [
+import { motion } from 'framer-motion'
+import Image from 'next/image'
+
+const HIGHLIGHTS = [
   {
-    icon: <Briefcase className="w-6 h-6 text-primary mr-3" />,
-    text: '5+ anos de experiência',
+    label: 'shipping',
+    value: '5+ anos',
+    detail: 'web e mobile em produção, de POCs a produtos com base de usuários ativa.',
   },
   {
-    icon: <GraduationCap className="w-6 h-6 text-primary mr-3" />,
-    text: 'Estudante de Administração pela UESC',
+    label: 'estudando',
+    value: 'UESC · ADM',
+    detail: 'estudante de Administração na Universidade Estadual de Santa Cruz.',
   },
   {
-    icon: <RocketIcon className="w-6 h-6 text-primary mr-3" />,
-    text: 'Entusiasta de tecnologia e inovação',
+    label: 'disciplina',
+    value: 'fullstack',
+    detail: 'do banco ao pixel — TS, Node, Go, Postgres, React, React Native.',
   },
   {
-    icon: <Code2Icon className="w-6 h-6 text-primary mr-3" />,
-    text: 'Desenvolvedor Fullstack',
+    label: 'baseado em',
+    value: 'Itabuna · BA',
+    detail: 'remoto, com clientes no Brasil e fora. Disponível em CET (BRT−3).',
   },
+]
+
+const TIMELINE = [
+  { year: '2019', what: 'primeiros sites freelance — landing pages e e-commerce' },
+  { year: '2021', what: 'foco em React e ecossistema TypeScript' },
+  { year: '2023', what: 'apps mobile com React Native, primeiros backends Node em produção' },
+  { year: '2025', what: 'Pique Digital, Datafly, agências — produtos com escala real' },
+  { year: '2026', what: 'agora — AI agents, Go, sistemas internos' },
 ]
 
 export function About() {
   return (
-    <motion.section
+    <section
       id="sobre"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="py-20"
+      className="relative py-24 lg:py-32 container mx-auto px-6 lg:px-10"
     >
-      <HoverCard>
-        <HoverCardTrigger asChild>
-          <Button variant="link" className="w-full text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-primary underline">
-              Sobre mim
-            </h2>
-          </Button>
-        </HoverCardTrigger>
-        <HoverCardContent className="w-80">
-          <div className="flex justify-between space-x-4">
-            <Avatar>
-              <AvatarImage src="https://github.com/Kibryant.png" />
-              <AvatarFallback>VC</AvatarFallback>
-            </Avatar>
-            <div className="space-y-1">
-              <h4 className="text-sm font-semibold">@arthurgustavk</h4>
-              <p className="text-sm">
-                Nasci em Itabuna, Bahia, Brasil. Atualmente, sou estudante de
-                Administração pela UESC.
-              </p>
-              <div className="flex items-center pt-2">
-                <CalendarIcon className="mr-2 h-4 w-4 opacity-70" />{' '}
-                <span className="text-xs text-muted-foreground">
-                  Nascido em 2004
-                </span>
-              </div>
+      <div className="flex items-baseline gap-4 mb-16">
+        <span className="meta-strong text-primary">01</span>
+        <h2 className="font-display text-4xl md:text-6xl lg:text-7xl italic tracking-tight">
+          sobre
+        </h2>
+        <div className="flex-1 rule mb-3" />
+        <span className="meta hidden md:inline">/ quem é arthur</span>
+      </div>
+
+      <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
+        {/* left — portrait + caption */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7 }}
+          className="lg:col-span-4"
+        >
+          <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-muted grain">
+            <Image
+              src="https://github.com/Kibryant.png"
+              alt="Arthur Gustavo"
+              fill
+              sizes="(min-width: 1024px) 33vw, 100vw"
+              className="object-cover grayscale-[20%]"
+              priority
+            />
+            <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-background/90 to-transparent">
+              <p className="meta-strong">@arthurgustavk</p>
+              <p className="meta opacity-70">itabuna · bahia · 2004</p>
             </div>
           </div>
-        </HoverCardContent>
-      </HoverCard>
-      <div className="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto px-8">
-        <motion.div
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex justify-center"
-        >
-          <Avatar className="w-40 h-40 md:w-60 md:h-60 shadow-lg rounded-full overflow-hidden border-4 border-blue-300">
-            <AvatarImage src="https://github.com/Kibryant.png" />
-            <AvatarFallback className="bg-primary text-white text-4xl font-semibold">
-              AG
-            </AvatarFallback>
-          </Avatar>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-left space-y-6"
-        >
-          <p className="text-lg md:text-xl leading-relaxed text-gray-700 dark:text-zinc-300">
-            Sou um desenvolvedor fullstack com mais de{' '}
-            <strong className="text-primary">5 anos</strong> de experiência na
-            criação de aplicações web e mobile inovadoras. Tenho paixão por
-            resolver problemas complexos e transformar ideias em produtos
-            digitais de alta qualidade.
-          </p>
-          <p className="text-lg md:text-xl leading-relaxed text-gray-700 dark:text-zinc-300">
-            Com um background sólido em tecnologias frontend e backend, estou
-            sempre buscando novos desafios e oportunidades para crescer e
-            aprender continuamente.
-          </p>
+        {/* right — copy + highlights */}
+        <div className="lg:col-span-8 space-y-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.6 }}
+            className="space-y-5 max-w-2xl"
+          >
+            <p className="text-2xl md:text-3xl font-display leading-snug text-balance">
+              <span className="italic">Engenheiro fullstack</span> apaixonado por
+              transformar ideias confusas em produtos digitais que rodam,
+              escalam e geram valor.
+            </p>
+            <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
+              Comecei em 2019 fazendo sites para clientes da minha cidade.
+              Hoje trabalho com agências e empresas brasileiras construindo
+              sistemas de verdade — dashboards de marketing, apps mobile, APIs
+              e POCs com IA. Background sólido em frontend (React/Next), backend
+              (Node/Go) e mobile (React Native) — mas o que importa é entender
+              o problema antes do stack.
+            </p>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            {ITEMS.map((item, index) => (
+          {/* highlight rows */}
+          <motion.dl
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="border-t border-rule"
+          >
+            {HIGHLIGHTS.map((item, idx) => (
               <motion.div
-                key={`about-item-${index + 1}`}
-                className="flex items-center p-4 shadow-lg rounded-lg bg-white dark:bg-transparent border border-gray-200 dark:border-zinc-700"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                key={item.label}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.1 * idx }}
+                className="grid grid-cols-12 gap-4 py-4 border-b border-rule items-baseline group hover:bg-surface/50 transition-colors -mx-2 px-2"
               >
-                {item.icon}
-                <span className="text-md font-medium text-gray-900 dark:text-zinc-200">
-                  {item.text}
-                </span>
+                <dt className="meta col-span-12 sm:col-span-3">
+                  <span className="text-muted-foreground/50 tabular-nums mr-2">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  {item.label}
+                </dt>
+                <dd className="col-span-12 sm:col-span-3 font-display text-xl md:text-2xl italic tracking-tight">
+                  {item.value}
+                </dd>
+                <dd className="col-span-12 sm:col-span-6 text-sm text-muted-foreground leading-relaxed">
+                  {item.detail}
+                </dd>
               </motion.div>
             ))}
-          </div>
-        </motion.div>
+          </motion.dl>
+
+          {/* tiny timeline */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <p className="meta mb-4">/ trajetória</p>
+            <ol className="relative">
+              {TIMELINE.map((t, idx) => (
+                <li
+                  key={t.year}
+                  className="flex gap-5 pb-4 last:pb-0 relative"
+                >
+                  <div className="flex flex-col items-center">
+                    <span className="meta-strong tabular-nums tracking-wider">
+                      {t.year}
+                    </span>
+                    <span
+                      className={`size-1.5 rounded-full mt-1 ${
+                        idx === TIMELINE.length - 1
+                          ? 'bg-primary'
+                          : 'bg-muted-foreground/40'
+                      }`}
+                    />
+                    {idx !== TIMELINE.length - 1 && (
+                      <span className="flex-1 w-px bg-rule mt-1" />
+                    )}
+                  </div>
+                  <p className="text-sm leading-relaxed pt-0.5 text-foreground/80">
+                    {t.what}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </motion.div>
+        </div>
       </div>
-    </motion.section>
+    </section>
   )
 }
